@@ -1,0 +1,33 @@
+<tool id="PHYLO_classification" name="Classification" version="1.0.0">
+  <!-- A short description of the tool that will be displayed next to the
+       tool's name in the selection pane. -->
+  <description>
+  </description>
+  <version_command>echo "guppy $(guppy --version)"</version_command>
+  <command interpreter="bash">
+    classification-wrapper.sh $dedup_info $refpkg.extra_files_path $aligned_seqs $split_map $placefile $reduped_seqs $database $by_taxon $by_specimen $group_by_specimen
+  </command>
+  <stdio>
+    <exit_code range="1:" level="fatal"/>
+    <regex match="warning" level="warning"/>
+  </stdio>
+  <inputs>
+    <param name="dedup_info" type="data" format="csv" label="Deduplication info"/>
+    <param name="refpkg" type="data" format="refpkg" label="Reference package"/>
+    <param name="aligned_seqs" type="data" format="fasta" label="Aligned sequences"/>
+    <param name="split_map" type="data" format="csv" label="Specimen map"/>
+    <param name="placefile" type="data" format="jplace" label="Placefile"/>
+  </inputs>
+  <outputs>
+    <data name="reduped_seqs" format="jplace" label="Reduped placefile"/>
+    <data name="database" format="sqlite3" label="Placement database"/>
+    <data name="by_taxon" format="csv" label="By-taxon classification"/>
+    <data name="by_specimen" format="csv" label="By-specimen classification"/>
+    <data name="group_by_specimen" format="csv" label="Grouped-by-specimen classification"/>
+  </outputs>
+  <!-- The contents of the help tag is parsed as reStructuredText. Please see
+       help-template.rst for examples of commonly-used sections in other Galaxy
+       tools. -->
+  <help>
+  </help>
+</tool>

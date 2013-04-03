@@ -1,0 +1,21 @@
+<tool id="CSV_csvlook" name="csvlook" version="1.0.0">
+  <!-- A short description of the tool that will be displayed next to the
+       tool's hyperlink in the selection pane. -->
+  <description>
+  </description>
+  <command>
+    csvlook $input > $output
+  </command>
+  <inputs>
+    <param name="input" type="data" format="csv" label="CSV file"/>
+  </inputs>
+  <outputs>
+    <data format="txt" name="output">
+    </data>
+  </outputs>
+  <!-- The contents of the help tag is parsed as reStructuredText. Please see
+       help-template.rst for examples of commonly-used sections in other Galaxy
+       tools. -->
+  <help>
+  </help>
+</tool>

@@ -1,0 +1,26 @@
+<tool id="PHYLO_pplacer" name="pplacer" version="1.0.0">
+  <!-- A short description of the tool that will be displayed next to the
+       tool's hyperlink in the selection pane. -->
+  <description>
+  </description>
+  <version_command>echo "pplacer $(pplacer --version)"</version_command>
+  <command interpreter="bash">
+    pplacer-wrapper.sh $refpkg.extra_files_path $query_seqs $placed_seqs
+  </command>
+  <stdio>
+    <exit_code range="1:" level="fatal"/>
+    <regex match="warning" level="warning"/>
+  </stdio>
+  <inputs>
+    <param name="refpkg" type="data" format="refpkg" label="Reference package"/>
+    <param name="query_seqs" type="data" format="fasta" label="Query alignment"/>
+  </inputs>
+  <outputs>
+    <data name="placed_seqs" format="jplace" label="Placed sequences"/>
+  </outputs>
+  <!-- The contents of the help tag is parsed as reStructuredText. Please see
+       help-template.rst for examples of commonly-used sections in other Galaxy
+       tools. -->
+  <help>
+  </help>
+</tool>

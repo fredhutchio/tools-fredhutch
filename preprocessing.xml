@@ -1,8 +1,5 @@
-<tool id="PHYLO_preprocessing" name="Preprocessing" version="1.0.0">
-  <!-- A short description of the tool that will be displayed next to the
-       tool's hyperlink in the selection pane. -->
-  <description>
-  </description>
+<tool id="PHYLO_preprocessing" name="Preprocess sequences" version="1.0.0">
+  <description>in preparation for phylogenetic placement</description>
   <version_command>echo "guppy $(guppy --version)"</version_command>
   <command interpreter="bash">
     preprocessing-wrapper.sh $refpkg.extra_files_path $input_seqs $dedup_seqs $dedup_info $aligned_seqs $split_map
@@ -14,7 +11,7 @@
   <inputs>
     <param name="refpkg" type="data" format="refpkg" label="Reference package"/>
     <param name="input_seqs" type="data" format="fasta" label="Input sequences"/>
-    <param name="split_map" type="data" format="csv" label="Split map"/>
+    <param name="split_map" type="data" format="csv" label="Specimen map"/>
   </inputs>
   <outputs>
     <data name="dedup_seqs" type="data" format="fasta" label="Deduplicated sequences"/>
@@ -25,5 +22,14 @@
        help-template.rst for examples of commonly-used sections in other Galaxy
        tools. -->
   <help>
+
+.. class:: infomark
+
+**What it does**
+
+This tool aligns query sequences with the reference sequences used to make the
+reference tree contained in the refpkg and then merges the query and reference
+sequences.
+
   </help>
 </tool>

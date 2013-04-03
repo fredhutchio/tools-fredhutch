@@ -1,7 +1,7 @@
 <tool id="CONVERTER_refpkgzip_to_refpkg" name="Convert zipped refpkg to refpkg" version="1.0.0">
   <command>unzip -j $input -d $output.files_path</command>
   <inputs>
-    <param name="input" type="data" format="refpkg.zip" label="Zipped refpkg file"/>
+    <param name="input" type="data" format="refpkg.zip" label="Zipped refpkg"/>
   </inputs>
   <outputs>
     <data name="output" format="refpkg"/>

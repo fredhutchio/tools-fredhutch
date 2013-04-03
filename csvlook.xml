@@ -1,8 +1,5 @@
-<tool id="CSV_csvlook" name="csvlook" version="1.0.0">
-  <!-- A short description of the tool that will be displayed next to the
-       tool's hyperlink in the selection pane. -->
-  <description>
-  </description>
+<tool id="CSV_csvlook" name="Render CSV file" version="1.0.0">
+  <description>as a human-readable table</description>
   <command>
     csvlook $input > $output
   </command>
@@ -17,5 +14,56 @@
        help-template.rst for examples of commonly-used sections in other Galaxy
        tools. -->
   <help>
+
+.. class:: infomark
+
+**What it does**
+
+This tool reformats a CSV file, like this::
+
+    "seqname","accession","tax_id","species_name","is_type"
+    "FM872653","FM872653","308994","Dialister propionicifaciens",0.0
+    "HM021348","HM021348","308994","Dialister propionicifaciens",0.0
+    "HM021446","HM021446","308994","Dialister propionicifaciens",0.0
+    "HM021374","HM021374","308994","Dialister propionicifaciens",0.0
+    "DQ130020","DQ130020","308994","Dialister propionicifaciens",0.0
+    "HM021391","HM021391","308994","Dialister propionicifaciens",0.0
+    "AM697483","AM697483","308994","Dialister propionicifaciens",0.0
+    "HM021462","HM021462","308994","Dialister propionicifaciens",0.0
+    "AY331416","AY331416","239137","Candidate Division TM7 oral",0.0
+    "FJ470446","FJ470446","239137","Candidate Division TM7 oral",0.0
+    "GU410618","GU410618","239137","Candidate Division TM7 oral",0.0
+    "AF125206","AF125206","239137","Candidate Division TM7 oral",0.0
+    "DQ666092","DQ666092","95818_1","Candidate Division TM7 vaginal",0.0
+    "S002223913","GQ900631","186802_3","bacterium BVAB3-Strain 1",0.0
+    "S002223914","GQ900632","186802_3","bacterium BVAB3-Strain 2",0.0
+    "S002223915","GQ900633","186802_3","bacterium BVAB3-Strain 3",0.0
+    "S002223916","GQ900634","186802_3","bacterium BVAB3-Strain 4",0.0
+    ...
+
+into something more readable, like this::
+
+    |-------------+-----------+----------+---------------------------------------+----------|
+    |  seqname    | accession | tax_id   | species_name                          | is_type  |
+    |-------------+-----------+----------+---------------------------------------+----------|
+    |  FM872653   | FM872653  | 308994   | Dialister propionicifaciens           | 0.0      |
+    |  HM021348   | HM021348  | 308994   | Dialister propionicifaciens           | 0.0      |
+    |  HM021446   | HM021446  | 308994   | Dialister propionicifaciens           | 0.0      |
+    |  HM021374   | HM021374  | 308994   | Dialister propionicifaciens           | 0.0      |
+    |  DQ130020   | DQ130020  | 308994   | Dialister propionicifaciens           | 0.0      |
+    |  HM021391   | HM021391  | 308994   | Dialister propionicifaciens           | 0.0      |
+    |  AM697483   | AM697483  | 308994   | Dialister propionicifaciens           | 0.0      |
+    |  HM021462   | HM021462  | 308994   | Dialister propionicifaciens           | 0.0      |
+    |  AY331416   | AY331416  | 239137   | Candidate Division TM7 oral           | 0.0      |
+    |  FJ470446   | FJ470446  | 239137   | Candidate Division TM7 oral           | 0.0      |
+    |  GU410618   | GU410618  | 239137   | Candidate Division TM7 oral           | 0.0      |
+    |  AF125206   | AF125206  | 239137   | Candidate Division TM7 oral           | 0.0      |
+    |  DQ666092   | DQ666092  | 95818_1  | Candidate Division TM7 vaginal        | 0.0      |
+    |  S002223913 | GQ900631  | 186802_3 | bacterium BVAB3-Strain 1              | 0.0      |
+    |  S002223914 | GQ900632  | 186802_3 | bacterium BVAB3-Strain 2              | 0.0      |
+    |  S002223915 | GQ900633  | 186802_3 | bacterium BVAB3-Strain 3              | 0.0      |
+    |  S002223916 | GQ900634  | 186802_3 | bacterium BVAB3-Strain 4              | 0.0      |
+    ...
+
   </help>
 </tool>

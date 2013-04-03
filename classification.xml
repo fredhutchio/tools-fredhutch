@@ -1,8 +1,5 @@
-<tool id="PHYLO_classification" name="Classification" version="1.0.0">
-  <!-- A short description of the tool that will be displayed next to the
-       tool's name in the selection pane. -->
-  <description>
-  </description>
+<tool id="PHYLO_classification" name="Output classifications" version="1.0.0">
+  <description>in tabular format or to a database</description>
   <version_command>echo "guppy $(guppy --version)"</version_command>
   <command interpreter="bash">
     classification-wrapper.sh $dedup_info $refpkg.extra_files_path $aligned_seqs $split_map $placefile $reduped_seqs $database $by_taxon $by_specimen $group_by_specimen
@@ -20,7 +17,7 @@
   </inputs>
   <outputs>
     <data name="reduped_seqs" format="jplace" label="Reduped placefile"/>
-    <data name="database" format="sqlite3" label="Placement database"/>
+    <data name="database" format="sqlite3" label="Classification database"/>
     <data name="by_taxon" format="csv" label="By-taxon classification"/>
     <data name="by_specimen" format="csv" label="By-specimen classification"/>
     <data name="group_by_specimen" format="csv" label="Grouped-by-specimen classification"/>
@@ -29,5 +26,58 @@
        help-template.rst for examples of commonly-used sections in other Galaxy
        tools. -->
   <help>
+
+.. class:: infomark
+
+**What it does**
+
+This tool outputs the classifications made by ``pplacer`` to a database or a
+tabular format appropriate for use with R.
+
+-----
+
+**Example**
+
+The classifications are simply done by containment. Say clade A of the
+reference tree is the smallest such that contains a given placement. The most
+specific classification for that read will be the lowest common ancestor of the
+taxonomic classifications for the leaves of A. If the desired classification is
+more specific than that, then we get a disconnect between the desired and the
+actual classification. For example, if we try to classify at the species level
+and the clade LCA is a genus, then we will get a genus name. If there is
+uncertainty in read placement, then there is uncertainty in classification.
+
+For example, here is a classification list made for one read using the tabular
+output. The columns are as follows: read name, attempted rank for
+classification, actual rank for classification, taxonomic identifier, and
+confidence. You can see that in this example, there is some uncertainty at and
+below species, but only one classification at the genus level::
+
+    GLKT0ZE01CQ2BU                      root          root       1          1
+    GLKT0ZE01CQ2BU                below_root    below_root  131567          1
+    GLKT0ZE01CQ2BU              superkingdom  superkingdom       2          1
+    GLKT0ZE01CQ2BU        below_superkingdom  superkingdom       2          1
+    GLKT0ZE01CQ2BU  below_below_superkingdom  superkingdom       2          1
+    GLKT0ZE01CQ2BU               superphylum  superkingdom       2          1
+    GLKT0ZE01CQ2BU                    phylum        phylum    1239          1
+    GLKT0ZE01CQ2BU                 subphylum        phylum    1239          1
+    GLKT0ZE01CQ2BU                     class         class  186801          1
+    GLKT0ZE01CQ2BU                  subclass         class  186801          1
+    GLKT0ZE01CQ2BU                     order         order  186802          1
+    GLKT0ZE01CQ2BU               below_order         order  186802          1
+    GLKT0ZE01CQ2BU         below_below_order         order  186802          1
+    GLKT0ZE01CQ2BU                  suborder         order  186802          1
+    GLKT0ZE01CQ2BU                    family        family  186804          1
+    GLKT0ZE01CQ2BU              below_family        family  186804          1
+    GLKT0ZE01CQ2BU                     genus         genus    1257          1
+    GLKT0ZE01CQ2BU             species_group         genus    1257          1
+    GLKT0ZE01CQ2BU          species_subgroup         genus    1257          1
+    GLKT0ZE01CQ2BU                   species         genus    1257  0.0732247
+    GLKT0ZE01CQ2BU                   species       species    1261   0.853561
+    GLKT0ZE01CQ2BU                   species       species  341694   0.073214
+    GLKT0ZE01CQ2BU             below_species         genus    1257  0.0732247
+    GLKT0ZE01CQ2BU             below_species       species    1261   0.853561
+    GLKT0ZE01CQ2BU             below_species       species  341694   0.073214
+
   </help>
 </tool>

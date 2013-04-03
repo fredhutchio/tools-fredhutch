@@ -1,8 +1,5 @@
-<tool id="PHYLO_pplacer" name="pplacer" version="1.0.0">
-  <!-- A short description of the tool that will be displayed next to the
-       tool's hyperlink in the selection pane. -->
-  <description>
-  </description>
+<tool id="PHYLO_pplacer" name="Place aligned sequences" version="1.0.0">
+  <description>on a reference tree</description>
   <version_command>echo "pplacer $(pplacer --version)"</version_command>
   <command interpreter="bash">
     pplacer-wrapper.sh $refpkg.extra_files_path $query_seqs $placed_seqs
@@ -22,5 +19,22 @@
        help-template.rst for examples of commonly-used sections in other Galaxy
        tools. -->
   <help>
+
+.. class:: infomark
+
+**What it does**
+
+This tool places query sequences on a fixed reference phylogenetic tree
+according to a reference alignment, producing taxonomic annotations which can
+be used for classification and visualization.
+
+-----
+
+**Citation**
+
+Matsen F, Kodner R, Armbrust E V: **pplacer: linear time maximum-likelihood and
+Bayesian phylogenetic placement of sequences onto a fixed reference tree**. BMC
+Bioinformatics 2010, **11**:1.
+
   </help>
 </tool>

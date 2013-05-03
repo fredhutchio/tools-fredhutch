@@ -10,8 +10,10 @@ extify() {
         local BASENAME=$(basename ${FILE})
         local EXT=${BASENAME##*.}
         if [[ ${EXT} != ${REQ_EXT} ]]; then
-            LINK="${BASENAME%%.*}.${REQ_EXT}"
-            ln -s ${FILE} ${LINK}
+            local LINK="${BASENAME%%.*}.${REQ_EXT}"
+            if [[ ! -f ${LINK} ]]; then
+                ln -s ${FILE} ${LINK}
+            fi
             FILE="${LINK}"
         fi
         OUTPUT="${OUTPUT} ${FILE}"
@@ -19,3 +21,12 @@ extify() {
 
     echo ${OUTPUT}
 }
+
+set -ex
+
+MATSENGRP="/home/matsengrp/local"
+export PATH="${MATSENGRP}/bin:${PATH}"
+export LD_LIBRARY_PATH="${MATSENGRP}/lib:${MATSENGRP}/lib64:${MATSENGRP}/lib64/R/lib:${LD_LIBRARY_PATH}"
+export PERL5LIB="${MATSENGRP}/lib/perl5:${PERL5LIB}"
+
+set -u

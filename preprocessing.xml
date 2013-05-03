@@ -1,6 +1,6 @@
 <tool id="PHYLO_preprocessing" name="Preprocess sequences" version="1.0.0">
   <description>in preparation for phylogenetic placement</description>
-  <version_command>echo "guppy $(guppy --version)"</version_command>
+  <version_command>echo "guppy $(/home/matsengrp/local/bin/guppy --version)"</version_command>
   <command interpreter="bash">
     preprocessing-wrapper.sh $refpkg.extra_files_path $input_seqs $dedup_seqs $dedup_info $aligned_seqs $split_map
   </command>

@@ -1,6 +1,6 @@
 <tool id="PHYLO_pplacer" name="Place aligned sequences" version="1.0.0">
   <description>on a reference tree</description>
-  <version_command>echo "pplacer $(pplacer --version)"</version_command>
+  <version_command>echo "pplacer $(/home/matsengrp/local/bin/pplacer --version)"</version_command>
   <command interpreter="bash">
     pplacer-wrapper.sh $refpkg.extra_files_path $query_seqs $placed_seqs
   </command>

@@ -1,6 +1,6 @@
 <tool id="PHYLO_classification" name="Output classifications" version="1.0.0">
   <description>in tabular format or to a database</description>
-  <version_command>echo "guppy $(guppy --version)"</version_command>
+  <version_command>echo "guppy $(/home/matsengrp/local/bin/guppy --version)"</version_command>
   <command interpreter="bash">
     classification-wrapper.sh $dedup_info $refpkg.extra_files_path $aligned_seqs $split_map $placefile $reduped_seqs $database $by_taxon $by_specimen $group_by_specimen
   </command>

@@ -1,0 +1,56 @@
+<tool id="PHYLO_filter" name="Filter and trim" version="1.0.0">
+  <description>sequences</description>
+  <version_command>/home/matsengrp/local/bin/seqmagick --version</version_command>
+  <command interpreter="bash">
+    filter-wrapper.sh $raw_seqs $input_qual $barcodes "$primer" $reverse_complement $plate_json $filtered_seqs $filter_report $filter_details $split_map $seq_qual_report
+  </command>
+  <stdio>
+    <exit_code range="1:" level="fatal"/>
+    <regex match="warning" level="warning"/>
+  </stdio>
+  <inputs>
+    <!-- TODO: can take either fasta+qual or fastq -->
+    <param name="raw_seqs" type="data" format="fasta" label="Unfiltered sequences"/>
+    <param name="input_qual" type="data" format="qual" label="Sequence quality data"/>
+    <!-- TODO: handle MID format for multi-sample sequencing; see http://qiime.org/scripts/split_libraries.html -->
+    <param name="barcodes" type="data" format="csv" label="Barcodes"/>
+    <param name="primer" type="text" label="Primer" area="True" size="1x30"/>
+    <param name="reverse_complement" type="boolean" truevalue="TRUE" falsevalue="FALSE" label="Reads uniformly correspond to negative strands"/>
+  </inputs>
+  <outputs>
+    <data name="filtered_seqs" format="fasta" label="Filtered sequences"/>
+    <data name="filter_report" format="txt" label="Filtering report"/>
+    <data name="filter_details" format="data" label="Filtering details"/>
+    <data name="split_map" format="csv" label="Specimen map"/>
+    <data name="seq_qual_report" format="txt" label="Sequencing quality report"/>
+  </outputs>
+  <configfiles>
+    <configfile name="plate_json">
+{
+  "plate": 1,
+  "name": "Plate",
+  "zones": [
+    {
+      "zone": 1,
+      "cleaning_stats": "${filter_details}"
+    }
+  ]
+}
+    </configfile>
+  </configfiles>
+  <!-- The contents of the help tag is parsed as reStructuredText. Please see
+       help-template.rst for examples of commonly-used sections in other Galaxy
+       tools. -->
+  <help>
+
+.. class:: infomark
+
+**What it does**
+
+This tool truncates and removes sequences that don’t match a set of quality
+criteria, as well as mapping sequence barcodes to specimens. It takes input
+sequences in FASTA format and a quality file, and outputs the filtered
+sequences as well as a filtering summary and a sequence quality report.
+
+  </help>
+</tool>

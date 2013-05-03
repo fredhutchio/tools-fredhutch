@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -eux
-
 source $(dirname $0)/util.sh
 
 PPLACER_DEFAULT_ARGS="-p --inform-prior --prior-lower 0.01 --map-identity"

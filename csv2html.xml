@@ -7,8 +7,7 @@
     <param name="input" type="data" format="csv" label="CSV file"/>
   </inputs>
   <outputs>
-    <data format="html" name="output">
-    </data>
+    <data format="html" name="output"/>
   </outputs>
   <!-- The contents of the help tag is parsed as reStructuredText. Please see
        help-template.rst for examples of commonly-used sections in other Galaxy

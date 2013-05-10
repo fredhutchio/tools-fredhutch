@@ -1,29 +1,35 @@
 #!/bin/bash
 
 source $(dirname $0)/util.sh
+source $1
 
-# inputs
-
-DEDUP_INFO=$1
-REFPKG=$2
-ALIGNED_SEQS=$(extify fasta $3)
-SPLIT_MAP=$4
-PLACED_SEQS=$(extify jplace $5)
-
-# outputs
-
-REDUPED_SEQS=$6
-DB=$7
-BY_TAXON=$8
-BY_SPECIMEN=$9
-GROUP_BY_SPECIMEN=${10}
-
-guppy redup -m -d ${DEDUP_INFO} -o ${REDUPED_SEQS} ${PLACED_SEQS}
+PLACED_SEQS=$(extify jplace ${PLACED_SEQS})
 REDUPED_SEQS=$(extify jplace ${REDUPED_SEQS})
+ALIGNED_SEQS=$(extify fasta ${ALIGNED_SEQS})
 
-rppr prep_db -c ${REFPKG} --sqlite ${DB}
+guppy redup \
+    -m \
+    -d ${DEDUP_INFO} \
+    -o ${REDUPED_SEQS} \
+    ${PLACED_SEQS}
 
-guppy classify --pp -c ${REFPKG} --sqlite ${DB} --classifier hybrid2 --nbc-sequences ${ALIGNED_SEQS} ${REDUPED_SEQS}
+rppr prep_db \
+    -c ${REFPKG} \
+    --sqlite ${CLASS_DB}
 
-multiclass_concat.py ${DB}
-classif_rect.py --specimen-map ${SPLIT_MAP} ${DB} ${BY_TAXON} ${BY_SPECIMEN} ${GROUP_BY_SPECIMEN}
+guppy classify \
+    --pp \
+    -c ${REFPKG} \
+    --sqlite ${CLASS_DB} \
+    --classifier hybrid2 \
+    --nbc-sequences ${ALIGNED_SEQS} \
+    ${REDUPED_SEQS}
+
+multiclass_concat.py ${CLASS_DB}
+
+classif_rect.py \
+    --specimen-map ${SPLIT_MAP} \
+    ${CLASS_DB} \
+    ${BY_TAXON} \
+    ${BY_SPECIMEN} \
+    ${GROUP_BY_SPECIMEN}

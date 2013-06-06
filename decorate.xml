@@ -1,0 +1,38 @@
+<tool id="PHYLO_decorate" name="Decorate" version="1.0.0">
+  <description>classification results with sample metadata</description>
+  <version_command>echo "guppy $(/home/matsengrp/local/bin/guppy --version)"</version_command>
+  <command interpreter="bash">
+    decorate-wrapper.sh ${config}
+  </command>
+  <stdio>
+    <exit_code range="1:" level="fatal"/>
+    <regex match="warning" level="warning"/>
+  </stdio>
+  <inputs>
+    <param name="group_by_specimen" type="data" format="csv" label="Grouped-by-specimen classification"/>
+    <param name="metadata" type="data" format="csv" label="Sample metadata"/>
+  </inputs>
+  <outputs>
+    <data name="decorated_group_by_specimen" format="csv" label="Decorated grouped-by-specimen classification"/>
+  </outputs>
+  <configfiles>
+    <configfile name="config">
+GROUP_BY_SPECIMEN="${group_by_specimen}"
+METADATA="${metadata}"
+DECORATED_GROUP_BY_SPECIMEN="${decorated_group_by_specimen}"
+    </configfile>
+  </configfiles>
+  <!-- The contents of the help tag is parsed as reStructuredText. Please see
+       help-template.rst for examples of commonly-used sections in other Galaxy
+       tools. -->
+  <help>
+
+.. class:: infomark
+
+**What it does**
+
+This tool joins the classifications made by ``pplacer`` with arbitrary sample
+metadata.
+
+  </help>
+</tool>

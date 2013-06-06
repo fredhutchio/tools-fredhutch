@@ -10,6 +10,7 @@
   </stdio>
   <inputs>
     <!-- TODO: can take either fasta+qual or fastq -->
+    <param name="plate_id" type="integer" value="1" label="Plate number"/>
     <param name="raw_seqs" type="data" format="fasta" label="Unfiltered sequences"/>
     <param name="input_qual" type="data" format="qual" label="Sequence quality data"/>
     <!-- TODO: handle MID format for multi-sample sequencing; see http://qiime.org/scripts/split_libraries.html -->
@@ -27,11 +28,11 @@
   <configfiles>
     <configfile name="plate_json">
 {
-  "plate": -1,
-  "name": "Plate -1",
+  "plate": ${plate_id},
+  "name": "Plate ${plate_id}",
   "zones": [
     {
-      "zone": -1,
+      "zone": 1,
       "cleaning_stats": "${filter_details}"
     }
   ]

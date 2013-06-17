@@ -15,7 +15,7 @@
     <param name="input_qual" type="data" format="qual" label="Sequence quality data"/>
     <!-- TODO: handle MID format for multi-sample sequencing; see http://qiime.org/scripts/split_libraries.html -->
     <param name="barcodes" type="data" format="csv" label="Barcodes"/>
-    <param name="primer" type="text" label="Primer" area="True" size="1x30" value="GCGGACTACCVGGGTATCTAAT"/>
+    <param name="primer" type="text" label="Primer" area="True" size="1x40" value="GCGGACTACCVGGGTATCTAAT"/>
     <param name="reverse_complement" type="boolean" truevalue="TRUE" falsevalue="FALSE" label="Reads uniformly correspond to negative strands"/>
   </inputs>
   <outputs>

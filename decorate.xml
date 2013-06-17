@@ -1,6 +1,6 @@
 <tool id="PHYLO_decorate" name="Decorate" version="1.0.0">
   <description>classification results with sample metadata</description>
-  <version_command>echo "guppy $(/home/matsengrp/local/bin/guppy --version)"</version_command>
+  <version_command>echo "decorate script 1.0.0"</version_command>
   <command interpreter="bash">
     decorate-wrapper.sh ${config}
   </command>
@@ -11,6 +11,7 @@
   <inputs>
     <param name="group_by_specimen" type="data" format="csv" label="Grouped-by-specimen classification"/>
     <param name="metadata" type="data" format="csv" label="Sample metadata"/>
+    <param name="columns" type="text" label="Comma-separated metadata columns" area="True" size="5x40"/>
   </inputs>
   <outputs>
     <data name="decorated_group_by_specimen" format="csv" label="Decorated grouped-by-specimen classification"/>
@@ -19,6 +20,7 @@
     <configfile name="config">
 GROUP_BY_SPECIMEN="${group_by_specimen}"
 METADATA="${metadata}"
+COLUMNS="${columns}"
 DECORATED_GROUP_BY_SPECIMEN="${decorated_group_by_specimen}"
     </configfile>
   </configfiles>

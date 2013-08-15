@@ -30,5 +30,20 @@ USEARCH_GROUPS="${usearch_groups}"
        help-template.rst for examples of commonly-used sections in other Galaxy
        tools. -->
   <help>
+
+.. class:: infomark
+
+**What it does**
+
+This tool queries large sequence databases for target sequences and assigns
+those sequences to clusters.
+
+-----
+
+**Citation**
+
+Edgar, R C: **Search and clustering orders of magnitude faster than
+BLAST**. Bioinformatics 2010, **26**:19.
+
   </help>
 </tool>

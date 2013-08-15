@@ -38,8 +38,8 @@ SPLIT_MAP="${split_map}"
 **What it does**
 
 This tool aligns query sequences with the reference sequences used to make the
-reference tree contained in the refpkg and then merges the query and reference
-sequences.
+reference tree contained in the reference package and then merges the query and
+reference sequences.
 
   </help>
 </tool>

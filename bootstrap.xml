@@ -30,5 +30,13 @@ METADATA="${metadata}"
        help-template.rst for examples of commonly-used sections in other Galaxy
        tools. -->
   <help>
+
+.. class:: infomark
+
+**What it does**
+
+This tool parses sample information and creates a mapping of samples to
+barcodes.
+
   </help>
 </tool>

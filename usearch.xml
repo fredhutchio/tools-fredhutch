@@ -1,12 +1,14 @@
 <tool id="PHYLO_usearch" name="Analyze sequences" version="1.0.0">
   <description>with USEARCH</description>
+  <macros>
+    <import>macros.xml</import>
+  </macros>
   <version_command>/home/matsengrp/local/bin/usearch6_64 --version</version_command>
   <command interpreter="bash">
     usearch-wrapper.sh $config
   </command>
   <stdio>
-    <exit_code range="1:" level="fatal"/>
-    <regex match="warning" level="warning"/>
+    <expand macro="basic_errors"/>
   </stdio>
   <inputs>
     <param name="input_seqs" type="data" format="fasta" label="Input sequences"/>

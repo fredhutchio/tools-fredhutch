@@ -4,7 +4,7 @@ source $(dirname $0)/util.sh
 source $1
 
 QUERY_SEQS=$(extify fasta ${QUERY_SEQS})
-PPLACER_DEFAULT_ARGS="-p --inform-prior --prior-lower 0.01 --map-identity"
+PPLACER_DEFAULT_ARGS="-j 12 -p --inform-prior --prior-lower 0.01 --map-identity"
 
 pplacer \
     ${PPLACER_DEFAULT_ARGS} \

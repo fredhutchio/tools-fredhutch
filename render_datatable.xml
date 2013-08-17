@@ -1,10 +1,13 @@
 <tool id="PHYLO_render_datatable" name="Render CSV file" version="1.0.0">
   <description>as an interactive HTML table</description>
+  <macros>
+    <import>macros.xml</import>
+  </macros>
   <command interpreter="bash">
     render_datatable-wrapper.sh $config
   </command>
   <stdio>
-    <exit_code range="1:" level="fatal"/>
+    <expand macro="basic_errors"/>
   </stdio>
   <inputs>
     <param name="input" type="data" format="csv" label="CSV file"/>

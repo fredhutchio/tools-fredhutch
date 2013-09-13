@@ -13,18 +13,22 @@
   <inputs>
     <param name="alignment" type="data" format="fasta" label="Alignment"/>
     <param name="genotype_map" type="data" format="csv" label="Genotype map"/>
-    <param name="allow_ancient" type="boolean" truevalue="TRUE" falsevalue="FALSE" label="Allow ancients?"/>
+    <param name="length" type="integer" value="1100000" min="110000" max="55000000" label="MCMC length" help="If the analysis results indicate poor convergence, try increasing this value."/>
+    <param name="allow_ancient" type="boolean" truevalue="TRUE" falsevalue="FALSE" label="Allow ancient ancestry" help="If this option is enabled, ancestral nodes will be considered as additional genotypes. See &lt;a href=&quot;http://thirteen-01.stat.iastate.edu/wiki/CBrotherAllowAncientAncestry&quot;&gt;this page&lt;/a&gt; for more information."/>
   </inputs>
   <outputs>
     <data name="report" format="pdf" label="Recombination report"/>
+    <data name="genotype_profile" format="csv" label="Combined genotype profile"/>
   </outputs>
   <configfiles>
     <configfile name="config">
 ALIGNMENT="${alignment}"
 GENOTYPE_MAP="${genotype_map}"
+LENGTH="${length}"
 ALLOW_ANCIENT="${allow_ancient}"
 
 REPORT="${report}"
+GENOTYPE_PROFILE="${genotype_profile}"
     </configfile>
   </configfiles>
   <!-- The contents of the help tag is parsed as reStructuredText. Please see
@@ -36,7 +40,14 @@ REPORT="${report}"
 
 **What it does**
 
-No idea!
+cBrother is software for inferring recombination when recombination is rare.
+
+**Citation**
+
+Suchard, M. A. & Weiss, R. E. & Dorman, K. S. & Sinsheimer, J. S., **Inferring Spatial Phylogenetic Variation Along Nucleotide Sequences: A Multiple Changepoint Model**, in 98 J. Am. Stat. Assoc., 462, 427-437 (2003)
+Suchard, M. A. & Weiss, R. E. & Dorman, K. S. & Sinsheimer, J. S., **Oh Brother, Where Art Thou? A Bayes Factor Test for Recombination with Uncertain Heritage**, in 51 Syst. Biol., 5, 715-728 (2002)
+Minin, V. N. & Dorman, K. S. & Fang, F. & Suchard, M. A., **Dual Multiple Change-Point Model Leads to More Accurate Recombination Detection**, in 21 Bioinformatics, 13, 3034-3042 (2005)
+Fang, F. & Minin, V. N. & Suchard, M. A. & Dorman, K. S., **Bayesian Phylogenetic Models to Identify Independent Recombination Events at Shared Crossover Points**, in In prep. (2006)
 
   </help>
 </tool>

@@ -14,15 +14,15 @@ python ${SCRIPT_DIR}/setup_cbrother.py ${FLAGS} ${ALIGNMENT} ${GENOTYPE_MAP} cbr
 
 # TODO: make this more slurmy
 export SHELL="/bin/bash"
-ls *.cmd | parallel -j 12 ${SCRIPT_DIR}'/run_cbrother.py {} {.}.phy cbrother.geno {.}.pp'
+ls *.cmd | parallel -j 12 "${SCRIPT_DIR}/run_cbrother.py --length ${LENGTH} {} {.}.phy cbrother.geno {.}.pp"
 
-rm -f pproc.csv
-for PPROC in *.pp.pproc; do
-    SEQUENCE=$(echo ${PPROC} | awk -F. '{ print $2 }')
-    IE_COP=$(grep 'number_ie_cop_gelman_rubin:' ${PPROC} | cut -d' ' -f2 | perl -p -e 's/\n//')
-    PCP=$(grep 'number_pcp_gelman_rubin:' ${PPROC} | cut -d' ' -f2 | perl -p -e 's/\n//')
-    echo "${SEQUENCE},${IE_COP},${PCP}" >> pproc.csv
+${SCRIPT_DIR}/diagnostic_summary.sh *.pp.pproc | a2ps --stdin="Diagnostic summary" - -o - | ps2pdfwr - diag.pdf
+pdftk cbrother.*.pdf diag.pdf cat output ${REPORT}
+
+for PROFILE in *.pp.profile; do
+    SEQUENCE=$(echo ${PROFILE} | awk -F. '{ print $2 }')
+    ${SCRIPT_DIR}/csvify_profile.R ${PROFILE} ${SEQUENCE}.profile.csv
 done
-sort < pproc.csv | sed '1isequence,number_ie_cop_gelman_rubin,number_pcp_gelman_rubin' | csvlook | a2ps - -o - | ps2pdfwr - pproc.pdf
 
-pdftk cbrother.*.pdf pproc.pdf cat output ${REPORT}
+csvstack -n sequence --filenames *.profile.csv > merged_profiles.csv
+${SCRIPT_DIR}/clean_merged_profiles.R merged_profiles.csv ${GENOTYPE_PROFILE}

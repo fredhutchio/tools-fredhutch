@@ -10,7 +10,7 @@ deduplicate_sequences.py \
     ${DEDUP_SEQS}
 
 refpkg_align.py align \
-    --use-mpi --mpi-arguments "-n 24" \
+    --use-mpi --mpi-arguments "-n 12" \
     --output-format fasta \
     ${REFPKG} \
     ${DEDUP_SEQS} \

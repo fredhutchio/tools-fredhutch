@@ -1,0 +1,44 @@
+<tool id="CFAR_cbrother" name="Analyze sequences" version="1.0.0">
+  <description>for recombination using Bayesian analysis</description>
+  <macros>
+    <import>macros.xml</import>
+  </macros>
+  <version_command>echo "cbrother v?"</version_command>
+  <command interpreter="bash">
+    cbrother-wrapper.sh ${config}
+  </command>
+  <stdio>
+    <expand macro="basic_errors"/>
+  </stdio>
+  <inputs>
+    <param name="alignment" type="data" format="fasta" label="Alignment"/>
+    <param name="genotype_map" type="data" format="csv" label="Genotype map"/>
+    <param name="allow_ancient" type="boolean" truevalue="TRUE" falsevalue="FALSE" label="Allow ancients?"/>
+  </inputs>
+  <outputs>
+    <data name="report" format="pdf" label="Recombination report"/>
+    <data name="output_zip" format="zip" label="Output data"/>
+  </outputs>
+  <configfiles>
+    <configfile name="config">
+ALIGNMENT="${alignment}"
+GENOTYPE_MAP="${genotype_map}"
+ALLOW_ANCIENT="${allow_ancient}"
+
+REPORT="${report}"
+OUTPUT_ZIP="${output_zip}"
+    </configfile>
+  </configfiles>
+  <!-- The contents of the help tag is parsed as reStructuredText. Please see
+       help-template.rst for examples of commonly-used sections in other Galaxy
+       tools. -->
+  <help>
+
+.. class:: infomark
+
+**What it does**
+
+No idea!
+
+  </help>
+</tool>

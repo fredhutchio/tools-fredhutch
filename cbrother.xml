@@ -15,6 +15,9 @@
     <param name="genotype_map" type="data" format="csv" label="Genotype map"/>
     <param name="length" type="integer" value="1100000" min="110000" max="55000000" label="MCMC length" help="If the analysis results indicate poor convergence, try increasing this value."/>
     <param name="allow_ancient" type="boolean" truevalue="TRUE" falsevalue="FALSE" label="Allow ancient ancestry" help="If this option is enabled, ancestral nodes will be considered as additional genotypes. See &lt;a href=&quot;http://thirteen-01.stat.iastate.edu/wiki/CBrotherAllowAncientAncestry&quot;&gt;this page&lt;/a&gt; for more information."/>
+    <param name="consensus" type="boolean" truevalue="TRUE" falsevalue="FALSE" checked="true" label="Use consensus sequences" help="If this option is enabled, consensus sequences for each genotype will be used instead of individual representative sequences. This option is recommended. See &lt;a href=&quot;http://thirteen-01.stat.iastate.edu/wiki/CBrotherRepresentativeData&quot;&gt;this page&lt;/a&gt; for more information."/>
+    <param name="parent_tree" type="data" format="nhx" optional="true" label="Parent tree" help="If the topology is known, you can constrain the search by providing a fixed parent tree."/>
+
   </inputs>
   <outputs>
     <data name="report" format="pdf" label="Recombination report"/>
@@ -26,6 +29,8 @@ ALIGNMENT="${alignment}"
 GENOTYPE_MAP="${genotype_map}"
 LENGTH="${length}"
 ALLOW_ANCIENT="${allow_ancient}"
+CONSENSUS="${consensus}"
+PARENT_TREE="${parent_tree}"
 
 REPORT="${report}"
 GENOTYPE_PROFILE="${genotype_profile}"
@@ -41,13 +46,6 @@ GENOTYPE_PROFILE="${genotype_profile}"
 **What it does**
 
 cBrother is software for inferring recombination when recombination is rare.
-
-**Citation**
-
-Suchard, M. A. & Weiss, R. E. & Dorman, K. S. & Sinsheimer, J. S., **Inferring Spatial Phylogenetic Variation Along Nucleotide Sequences: A Multiple Changepoint Model**, in 98 J. Am. Stat. Assoc., 462, 427-437 (2003)
-Suchard, M. A. & Weiss, R. E. & Dorman, K. S. & Sinsheimer, J. S., **Oh Brother, Where Art Thou? A Bayes Factor Test for Recombination with Uncertain Heritage**, in 51 Syst. Biol., 5, 715-728 (2002)
-Minin, V. N. & Dorman, K. S. & Fang, F. & Suchard, M. A., **Dual Multiple Change-Point Model Leads to More Accurate Recombination Detection**, in 21 Bioinformatics, 13, 3034-3042 (2005)
-Fang, F. & Minin, V. N. & Suchard, M. A. & Dorman, K. S., **Bayesian Phylogenetic Models to Identify Independent Recombination Events at Shared Crossover Points**, in In prep. (2006)
 
   </help>
 </tool>

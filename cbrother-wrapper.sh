@@ -45,11 +45,6 @@ for PROFILE in *.pp.profile; do
     ${SCRIPT_DIR}/csvify_profile.R ${PROFILE} ${SEQUENCE}.profile.csv
 done
 
-PROFILES=$(find . -name '*.profile.csv' -print0)
-if [[ ${#PROFILES} > 1 ]]; then
-    csvstack -n sequence --filenames *.profile.csv > merged_profiles.csv
-else
-    cp ${PROFILES} merged_profiles.csv
-fi
+csvstack -n sequence --filenames *.profile.csv /dev/null > merged_profiles.csv
 
 ${SCRIPT_DIR}/clean_merged_profiles.R merged_profiles.csv ${GENOTYPE_PROFILE}

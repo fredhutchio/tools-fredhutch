@@ -6,7 +6,6 @@ source $1
 INPUT_QUAL=$(extify qual ${INPUT_QUAL})
 BARCODES=$(extify csv ${BARCODES})
 RAW_SEQS=$(extify fasta ${RAW_SEQS})
-FILTERED_SEQS=$(extify fasta ${FILTERED_SEQS})
 
 seqmagick quality-filter \
     --input-qual ${INPUT_QUAL} \
@@ -22,13 +21,15 @@ seqmagick quality-filter \
     --quality-window-prop 0.9 \
     --quality-window-mean-qual 15 \
     ${RAW_SEQS} \
-    ${FILTERED_SEQS}
+    filtered.fasta
 
 if [[ ${REVERSE_COMPLEMENT} == "TRUE" ]]; then
     seqmagick mogrify \
         --reverse-complement \
-        ${FILTERED_SEQS}
+        filtered.fasta
 fi
+
+mv filtered.fasta ${FILTERED_SEQS}
 
 # TODO: separate tool for concatenating seq data (and reverse complementing them?)
 #cat [12]*Reads.fasta | seqmagick convert --input-format fasta - combined.fasta --reverse-complement

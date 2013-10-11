@@ -4,7 +4,6 @@ source $(dirname $0)/util.sh
 source $1
 
 PLACED_SEQS=$(extify jplace ${PLACED_SEQS})
-REDUPED_SEQS=$(extify jplace ${REDUPED_SEQS})
 ALIGNED_SEQS=$(extify fasta ${ALIGNED_SEQS})
 
 guppy redup \
@@ -12,6 +11,8 @@ guppy redup \
     -d ${DEDUP_INFO} \
     -o ${REDUPED_SEQS} \
     ${PLACED_SEQS}
+
+REDUPED_SEQS=$(extify jplace ${REDUPED_SEQS})
 
 rppr prep_db \
     -c ${REFPKG} \

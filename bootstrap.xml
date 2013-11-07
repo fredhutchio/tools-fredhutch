@@ -40,7 +40,9 @@ METADATA="${metadata}"
 **What it does**
 
 This tool parses sample information and creates a mapping of samples to
-barcodes.
+barcodes. The sample information file must contain the columns ``sampleid``,
+``barcode``, and ``reverse``, and can optionally contain a ``zone`` column
+also.
 
   </help>
 </tool>

@@ -26,8 +26,8 @@ def main(arguments):
 
     args = parser.parse_args(arguments)
 
-    label_key = 'label'
-    primer_key = 'primer'
+    label_key = 'sampleid'
+    primer_key = 'reverse'
     barcode_key = 'barcode'
     zone_key = 'zone'
 

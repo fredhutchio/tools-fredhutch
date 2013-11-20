@@ -27,7 +27,7 @@
     <data name="filtered_seqs" format="fasta" label="Filtered sequences"/>
     <data name="filter_report" format="tabular" label="Filtering report"/>
     <data name="filter_details" format="data" label="Filtering details"/>
-    <data name="split_map" format="csv" label="Specimen map"/>
+    <data name="split_map" format="csv" label="Read-to-specimen map"/>
     <data name="seq_qual_report" format="report" label="Sequencing quality report"/>
   </outputs>
   <configfiles>

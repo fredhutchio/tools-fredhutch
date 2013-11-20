@@ -1,4 +1,4 @@
-<tool id="PHYLO_classification" name="Output classifications" version="1.0.0">
+<tool id="PHYLO_classification" name="Output classifications" version="1.1.0">
   <description>in tabular format or to a database</description>
   <macros>
     <import>macros.xml</import>
@@ -14,8 +14,9 @@
     <param name="dedup_info" type="data" format="csv" label="Deduplication info"/>
     <param name="refpkg" type="data" format="refpkg" label="Reference package"/>
     <param name="aligned_seqs" type="data" format="fasta" label="Aligned sequences"/>
-    <param name="split_map" type="data" format="csv" label="Specimen map"/>
+    <param name="split_map" type="data" format="csv" label="Read-to-specimen map"/>
     <param name="placed_seqs" type="data" format="jplace" label="Placements"/>
+    <param name="label_map" type="data" format="csv" label="Specimen-to-label map"/>
   </inputs>
   <outputs>
     <data name="reduped_seqs" format="jplace" label="Reduped placements"/>
@@ -31,6 +32,7 @@ REFPKG="${refpkg.extra_files_path}"
 ALIGNED_SEQS="${aligned_seqs}"
 SPLIT_MAP="${split_map}"
 PLACED_SEQS="${placed_seqs}"
+LABEL_MAP="${label_map}"
 
 REDUPED_SEQS="${reduped_seqs}"
 CLASS_DB="${class_db}"

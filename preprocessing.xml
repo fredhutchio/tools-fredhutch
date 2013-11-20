@@ -13,7 +13,7 @@
   <inputs>
     <param name="refpkg" type="data" format="refpkg" label="Reference package"/>
     <param name="input_seqs" type="data" format="fasta" label="Input sequences"/>
-    <param name="split_map" type="data" format="csv" label="Specimen map"/>
+    <param name="split_map" type="data" format="csv" label="Read-to-specimen map"/>
   </inputs>
   <outputs>
     <data name="dedup_seqs" type="data" format="fasta" label="Deduplicated sequences"/>

@@ -28,8 +28,12 @@
   <configfiles>
     <configfile name="config">
 PLATE_ID="${plate_id}"
-JUNIOR="${junior}"
-ZONE_ID="${zone_id}"
+JUNIOR="${junior_conditional.junior}"
+#if $junior_conditional.junior == ""
+ZONE_ID="${junior_conditional.zone_id}"
+#else
+ZONE_ID="1"
+#end if
 SAMPLE_INFO="${sample_info}"
 BARCODES="${barcodes}"
 LABELS="${labels}"

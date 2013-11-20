@@ -49,7 +49,7 @@ INPUT_QUAL="${input_qual}"
 BARCODES="${barcodes}"
 PRIMER="${primer}"
 MIN_LENGTH="${min_length}"
-MIN_QUALITY=${min_quality}"
+MIN_QUALITY="${min_quality}"
 REVERSE_COMPLEMENT="${reverse_complement}"
 PLATE_JSON="${plate_json}"
 

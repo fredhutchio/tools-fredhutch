@@ -1,9 +1,9 @@
-<tool id="PHYLO_bootstrap" name="Prepare data" version="1.0.0">
+<tool id="PHYLO_bootstrap" name="Prepare data" version="1.1.0">
   <description>for analysis</description>
   <macros>
     <import>macros.xml</import>
   </macros>
-  <version_command>echo "bootstrap script 1.0.0"</version_command>
+  <version_command>echo "bootstrap script 1.1.0"</version_command>
   <command interpreter="bash">
     bootstrap-wrapper.sh $config
   </command>
@@ -12,7 +12,12 @@
   </stdio>
   <inputs>
     <param name="plate_id" type="integer" value="1" label="Plate number"/>
-    <param name="zone_id" type="integer" value="1" label="Zone number"/>
+    <conditional name="junior_conditional">
+      <param name="junior" type="boolean" truevalue="--junior" falsevalue="" label="Use junior run specimen naming convention"/>
+      <when value="">
+        <param name="zone_id" type="integer" value="1" label="Zone number"/>
+      </when>
+    </conditional>
     <param name="sample_info" type="data" format="csv" label="Sample information"/>
   </inputs>
   <outputs>
@@ -23,6 +28,7 @@
   <configfiles>
     <configfile name="config">
 PLATE_ID="${plate_id}"
+JUNIOR="${junior}"
 ZONE_ID="${zone_id}"
 SAMPLE_INFO="${sample_info}"
 BARCODES="${barcodes}"

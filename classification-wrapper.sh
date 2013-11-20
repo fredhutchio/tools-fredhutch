@@ -33,4 +33,7 @@ classif_rect.py \
     ${CLASS_DB} \
     ${BY_TAXON} \
     ${BY_SPECIMEN} \
-    ${GROUP_BY_SPECIMEN}
+    groupBySpecimen.csv
+
+csvjoin -c "specimen" ${LABEL_MAP} groupBySpecimen.csv | \
+    csvcut -C 3 > ${GROUP_BY_SPECIMEN}

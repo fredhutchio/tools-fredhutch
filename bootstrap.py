@@ -15,6 +15,7 @@ def main(arguments):
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument('infile', help = "CSV input",
                         type = argparse.FileType('r'), default = sys.stdin)
+    parser.add_argument('--junior', help = "use junior run specimen naming convention", action = 'store_true')
     parser.add_argument('--plate', help = "plate number", type = int, required = True)
     parser.add_argument('--zone', help = "zone number", type = int, required = True)
     parser.add_argument('--barcodes', help = "name of barcodes file",
@@ -31,7 +32,7 @@ def main(arguments):
     barcode_key = 'barcode'
     zone_key = 'zone'
 
-    fstr = "p{}z{}{}"
+    fstr = "j{plate_id}{primer_id}" if args.junior else "p{plate_id}z{zone_id}{primer_id}"
 
     reader = csv.DictReader(sys.stdin)
 
@@ -74,7 +75,7 @@ def main(arguments):
         seen_labels[label] = i
         seen_primers[primer] = i
 
-        specimen = fstr.format(args.plate, zone, primer.strip().lower().replace('-',''))
+        specimen = fstr.format(plate_id=args.plate, zone_id=zone, primer_id=primer.strip().lower().replace('-',''))
         barcodes.writerow([specimen, barcode])
         labels.writerow([specimen, label])
         metadata.writerow([specimen, args.plate, zone, label, primer])

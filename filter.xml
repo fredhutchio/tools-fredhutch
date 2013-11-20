@@ -1,4 +1,4 @@
-<tool id="PHYLO_filter" name="Filter and trim" version="1.0.0">
+<tool id="PHYLO_filter" name="Filter and trim" version="1.1.0">
   <description>sequences</description>
   <macros>
     <import>macros.xml</import>
@@ -19,6 +19,8 @@
     <!-- TODO: handle MID format for multi-sample sequencing; see http://qiime.org/scripts/split_libraries.html -->
     <param name="barcodes" type="data" format="csv" label="Barcodes"/>
     <param name="primer" type="text" label="Primer" area="True" size="1x40"/>
+    <param name="min_length" type="integer" min="100" max="1000" value="350" label="Minimum sequence length"/>
+    <param name="min_quality" type="integer" min="0" max="63" value="35" label="Minimum mean sequence quality"/>
     <param name="reverse_complement" type="boolean" truevalue="TRUE" falsevalue="FALSE" label="Reads uniformly correspond to negative strands"/>
   </inputs>
   <outputs>
@@ -46,6 +48,8 @@ RAW_SEQS="${raw_seqs}"
 INPUT_QUAL="${input_qual}"
 BARCODES="${barcodes}"
 PRIMER="${primer}"
+MIN_LENGTH="${min_length}"
+MIN_QUALITY=${min_quality}"
 REVERSE_COMPLEMENT="${reverse_complement}"
 PLATE_JSON="${plate_json}"
 
@@ -69,6 +73,27 @@ This tool truncates and removes sequences that don’t match a set of quality
 criteria, as well as mapping sequence barcodes to specimens. It takes input
 sequences in FASTA format and a quality file, and outputs the filtered
 sequences as well as a filtering summary and a sequence quality report.
+
+The default quality filter settings are:
+
++---------------------------+------+
+|parameter                  |value |
++===========================+======+
+|--min-length               |350   |
++---------------------------+------+
+|--min-mean-quality         |35    |
++---------------------------+------+
+|--quality-window           |30    |
++---------------------------+------+
+|--quality-window-prop      |0.9   |
++---------------------------+------+
+|--quality-window-mean-qual |15    |
++---------------------------+------+
+
+See seqmagick's `quality filter documentation`_ for explanation of these
+parameters.
+
+.. _quality filter documentation: http://fhcrc.github.io/seqmagick/quality_filter.html
 
   </help>
 </tool>

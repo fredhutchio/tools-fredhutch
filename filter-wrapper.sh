@@ -15,8 +15,8 @@ seqmagick quality-filter \
     --details-out ${FILTER_DETAILS} \
     --map-out ${SPLIT_MAP} \
     --barcode-header \
-    --min-length 350 \
-    --min-mean-quality 35 \
+    --min-length ${MIN_LENGTH} \
+    --min-mean-quality ${MIN_QUALITY} \
     --quality-window 30 \
     --quality-window-prop 0.9 \
     --quality-window-mean-qual 15 \

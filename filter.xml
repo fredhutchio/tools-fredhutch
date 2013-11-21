@@ -76,7 +76,6 @@ sequences as well as a filtering summary and a sequence quality report.
 
 The default quality filter settings are:
 
-
 +---------------------------+------+
 |parameter                  |value |
 +===========================+======+
@@ -90,7 +89,6 @@ The default quality filter settings are:
 +---------------------------+------+
 |--quality-window-mean-qual |15    |
 +---------------------------+------+
-
 
 See seqmagick's `quality filter documentation`_ for full explanations of these
 parameters.

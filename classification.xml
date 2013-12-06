@@ -1,4 +1,4 @@
-<tool id="PHYLO_classification" name="Output classifications" version="1.1.0">
+<tool id="PHYLO_classification" name="Output classifications" version="1.2.0">
   <description>in tabular format or to a database</description>
   <macros>
     <import>macros.xml</import>
@@ -17,6 +17,14 @@
     <param name="split_map" type="data" format="csv" label="Read-to-specimen map"/>
     <param name="placed_seqs" type="data" format="jplace" label="Placements"/>
     <param name="label_map" type="data" format="csv" label="Specimen-to-label map"/>
+    <param name="want_rank" type="select" label="Desired classification rank">
+      <option value="species" selected="true">Species</option>
+      <option value="genus">Genus</option>
+      <option value="family">Family</option>
+      <option value="order">Order</option>
+      <option value="class">Class</option>
+      <option value="phylum">Phylum</option>
+    </param>
   </inputs>
   <outputs>
     <data name="reduped_seqs" format="jplace" label="Reduped placements"/>
@@ -33,6 +41,7 @@ ALIGNED_SEQS="${aligned_seqs}"
 SPLIT_MAP="${split_map}"
 PLACED_SEQS="${placed_seqs}"
 LABEL_MAP="${label_map}"
+WANT_RANK="${want_rank}"
 
 REDUPED_SEQS="${reduped_seqs}"
 CLASS_DB="${class_db}"

@@ -29,6 +29,7 @@ guppy classify \
 multiclass_concat.py ${CLASS_DB}
 
 classif_rect.py \
+    --want-rank ${WANT_RANK} \
     --specimen-map ${SPLIT_MAP} \
     ${CLASS_DB} \
     ${BY_TAXON} \

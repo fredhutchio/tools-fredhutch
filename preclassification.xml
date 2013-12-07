@@ -1,5 +1,5 @@
 <tool id="PHYLO_preclassification" name="Generate database" version="1.0.0">
-  <description>for classifcation</description>
+  <description>for classification</description>
   <macros>
     <import>macros.xml</import>
   </macros>

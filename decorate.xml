@@ -23,6 +23,7 @@
 GROUP_BY_SPECIMEN="${group_by_specimen}"
 METADATA="${metadata}"
 COLUMNS="${columns}"
+
 DECORATED_GROUP_BY_SPECIMEN="${decorated_group_by_specimen}"
     </configfile>
   </configfiles>

@@ -39,6 +39,7 @@ JUNIOR="--junior"
 ZONE_ID="1"
 #end if
 SAMPLE_INFO="${sample_info}"
+
 BARCODES="${barcodes}"
 LABELS="${labels}"
 METADATA="${metadata}"

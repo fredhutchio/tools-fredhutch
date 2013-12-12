@@ -16,20 +16,21 @@
     <param name="split_map" type="data" format="csv" label="Read-to-specimen map"/>
   </inputs>
   <outputs>
-    <data name="dedup_seqs" type="data" format="fasta" label="Deduplicated sequences"/>
-    <data name="dedup_info" type="data" format="csv" label="Deduplication info"/>
-    <data name="aligned_seqs" type="data" format="fasta" label="Aligned sequences"/>
-    <data name="aligned_scores" type="data" format="txt" label="Alignment scores"/>
+    <data name="dedup_seqs" format="fasta" label="Deduplicated sequences"/>
+    <data name="dedup_info" format="csv" label="Deduplication info"/>
+    <data name="aligned_seqs" format="fasta" label="Aligned sequences"/>
+    <data name="aligned_scores" format="txt" label="Alignment scores"/>
   </outputs>
   <configfiles>
     <configfile name="config">
 REFPKG="${refpkg.extra_files_path}"
 INPUT_SEQS="${input_seqs}"
+SPLIT_MAP="${split_map}"
+
 DEDUP_SEQS="${dedup_seqs}"
 DEDUP_INFO="${dedup_info}"
 ALIGNED_SEQS="${aligned_seqs}"
 ALIGNED_SCORES="${aligned_scores}"
-SPLIT_MAP="${split_map}"
     </configfile>
   </configfiles>
   <!-- The contents of the help tag is parsed as reStructuredText. Please see

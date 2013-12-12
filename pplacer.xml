@@ -21,6 +21,7 @@
     <configfile name="config">
 REFPKG="${refpkg.extra_files_path}"
 QUERY_SEQS="${query_seqs}"
+
 PLACED_SEQS="${placed_seqs}"
     </configfile>
   </configfiles>

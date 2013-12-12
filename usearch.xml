@@ -1,4 +1,4 @@
-<tool id="PHYLO_usearch" name="Analyze sequences" version="1.0.0">
+<tool id="PHYLO_usearch" name="Analyze sequences" version="1.1.0">
   <description>with USEARCH</description>
   <macros>
     <import>macros.xml</import>
@@ -15,7 +15,6 @@
     <param name="class_db" type="data" format="sqlite3" label="Classification database"/>
   </inputs>
   <outputs>
-    <data format="csv" name="usearch_meta"/>
     <data format="csv" name="usearch_hits" label="USEARCH hits"/>
     <data format="csv" name="usearch_groups" label="USEARCH groups"/>
   </outputs>
@@ -23,7 +22,7 @@
     <configfile name="config">
 INPUT_SEQS="${input_seqs}"
 CLASS_DB="${class_db}"
-USEARCH_META="${usearch_meta}"
+
 USEARCH_HITS="${usearch_hits}"
 USEARCH_GROUPS="${usearch_groups}"
     </configfile>

@@ -1,4 +1,4 @@
-<tool id="PHYLO_filter" name="Filter and trim" version="1.1.0">
+<tool id="PHYLO_filter" name="Filter and trim" version="1.2.0">
   <description>sequences</description>
   <macros>
     <import>macros.xml</import>
@@ -28,7 +28,7 @@
     <data name="filter_report" format="tabular" label="Filtering report"/>
     <data name="filter_details" format="data" label="Filtering details"/>
     <data name="split_map" format="csv" label="Read-to-specimen map"/>
-    <data name="seq_qual_report" format="report" label="Sequencing quality report"/>
+    <data name="seq_qual_report" format="html" label="Sequencing quality report"/>
   </outputs>
   <configfiles>
     <configfile name="plate_json">
@@ -57,7 +57,8 @@ FILTERED_SEQS="${filtered_seqs}"
 FILTER_REPORT="${filter_report}"
 FILTER_DETAILS="${filter_details}"
 SPLIT_MAP="${split_map}"
-SQR_DIR="${seq_qual_report.extra_files_path}"
+SQR="${seq_qual_report}"
+SQR_DIR="${seq_qual_report.files_path}"
     </configfile>
   </configfiles>
   <!-- The contents of the help tag is parsed as reStructuredText. Please see

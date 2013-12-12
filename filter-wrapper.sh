@@ -37,8 +37,7 @@ mv filtered.fasta ${FILTERED_SEQS}
 
 sequencing_quality_report.py ${PLATE_JSON} -t "Sequencing quality report" -o ${SQR_DIR}
 
-SQR_REDIRECT="${SQR_DIR%%_files}.dat"
-cat <<EOF > ${SQR_REDIRECT}
+cat <<EOF > ${SQR}
 <!DOCTYPE HTML>
 <html lang="en-US">
   <head/>

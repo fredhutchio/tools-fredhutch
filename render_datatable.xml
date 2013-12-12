@@ -1,4 +1,4 @@
-<tool id="PHYLO_render_datatable" name="Render CSV file" version="1.0.0">
+<tool id="PHYLO_render_datatable" name="Render CSV file" version="1.1.0">
   <description>as an interactive HTML table</description>
   <macros>
     <import>macros.xml</import>
@@ -13,12 +13,14 @@
     <param name="input" type="data" format="csv" label="CSV file"/>
   </inputs>
   <outputs>
-    <data format="report" name="output" label="Generated table"/>
+    <data format="html" name="output" label="Generated table"/>
   </outputs>
   <configfiles>
     <configfile name="config">
 INPUT="${input}"
-OUTPUT_DIR="${output.extra_files_path}"
+
+OUTPUT="${output}"
+OUTPUT_DIR="${output.files_path}"
     </configfile>
   </configfiles>
   <!-- The contents of the help tag is parsed as reStructuredText. Please see

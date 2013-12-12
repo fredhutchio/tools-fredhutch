@@ -9,8 +9,7 @@ python $(dirname $0)/render_datatable.py \
     < ${INPUT} \
     > ${OUTPUT_DIR}/index.html
 
-OUTPUT_REDIRECT="${OUTPUT_DIR%%_files}.dat"
-cat <<EOF > ${OUTPUT_REDIRECT}
+cat <<EOF > ${OUTPUT}
 <!DOCTYPE HTML>
 <html lang="en-US">
   <head/>

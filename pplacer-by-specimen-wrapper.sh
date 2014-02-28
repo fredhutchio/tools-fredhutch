@@ -3,7 +3,7 @@
 source $(dirname $0)/util.sh
 source $1
 
-PPLACER_DEFAULT_ARGS="-j 12 -p --inform-prior --prior-lower 0.01 --map-identity"
+PPLACER_DEFAULT_ARGS="-j ${GALAXY_SLOTS:-4} -p --inform-prior --prior-lower 0.01 --map-identity"
 
 SPECIMENS=$(cut -d, -f2 ${SPLIT_MAP} | sort -u)
 for SPECIMEN in ${SPECIMENS}; do
@@ -18,7 +18,7 @@ for SPECIMEN in ${SPECIMENS}; do
         specimen-dedup.fasta
 
     refpkg_align.py align \
-        --use-mpi --mpi-arguments "-n 12" \
+        --use-mpi --mpi-arguments "-n ${GALAXY_SLOTS:-4}" \
         --output-format fasta \
         --stdout specimen-scores.txt \
         ${REFPKG} \

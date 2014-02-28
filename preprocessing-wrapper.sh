@@ -10,7 +10,7 @@ deduplicate_sequences.py \
     ${DEDUP_SEQS}
 
 refpkg_align.py align \
-    --use-mpi --mpi-arguments "-n 12" \
+    --use-mpi --mpi-arguments "-n ${GALAXY_SLOTS:-4}" \
     --output-format fasta \
     --stdout ${ALIGNED_SCORES} \
     ${REFPKG} \

@@ -18,7 +18,7 @@
     <param name="input_qual" type="data" format="qual" label="Sequence quality data"/>
     <!-- TODO: handle MID format for multi-sample sequencing; see http://qiime.org/scripts/split_libraries.html -->
     <param name="barcodes" type="data" format="csv" label="Barcodes"/>
-    <param name="primer" type="text" label="Primer" area="True" size="1x40"/>
+    <param name="primer" type="text" label="Primer" value="GCGGACTACCVGGGTATCTAAT" area="True" size="1x40"/>
     <param name="min_length" type="integer" min="100" max="1000" value="350" label="Minimum sequence length"/>
     <param name="min_quality" type="integer" min="0" max="63" value="35" label="Minimum mean sequence quality"/>
     <param name="reverse_complement" type="boolean" truevalue="TRUE" falsevalue="FALSE" label="Reads uniformly correspond to negative strands"/>

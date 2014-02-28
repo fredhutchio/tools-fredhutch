@@ -29,7 +29,7 @@ python ${SCRIPT_DIR}/setup_cbrother.py ${FLAGS} ${ALIGNMENT} ${GENOTYPE_MAP} cbr
 
 # TODO: make this more slurmy
 export SHELL="/bin/bash"
-ls *.cmd | parallel -j 12 "${SCRIPT_DIR}/run_cbrother.py --cores 1 --length ${LENGTH} {} {.}.phy cbrother.geno {.}.pp"
+ls *.cmd | parallel -j ${GALAXY_SLOTS:-4} "${SCRIPT_DIR}/run_cbrother.py --cores 1 --length ${LENGTH} {} {.}.phy cbrother.geno {.}.pp"
 
 PDFS=""
 for PPROC in *.pp.pproc; do

@@ -31,7 +31,7 @@
         <!-- do nothing -->
       </when>
       <when value="cluster">
-        <param name="ref_file" type="data" format="csv" label="Sequence-to-cluster map" help="CSV file mapping sequences to clusters; cluster consensus sequences will be used as query sequences. Any sequences not mapped to a cluster will be implicity put in an 'all' cluster."/>
+        <param name="ref_file" type="data" format="csv" label="Sequence-to-cluster map" help="CSV file mapping sequences to clusters; cluster consensus sequences will be used as query sequences. Any sequences not mapped to a cluster will be implicitly put in an 'all' cluster."/>
       </when>
       <when value="manual">
         <param name="ref_file" type="data" format="fasta" label="Reference sequence(s)" help="Sequence name(s) should correspond to cluster names if using a cluster map. Otherwise, ensure a sequence named 'all' is included in the alignment. Clusters for which no reference sequence is specified will be compared to a computed consensus sequence."/>

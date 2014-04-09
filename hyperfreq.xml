@@ -41,7 +41,7 @@
   <outputs>
     <data name="calls" format="csv" label="Calls"/>
     <data name="sites" format="csv" label="Sites"/>
-    <data name="log" format="txt" label="Analysis log"/>
+    <data name="log" format="txt" label="Analysis log" hidden="true"/>
   </outputs>
   <configfiles>
     <configfile name="config">

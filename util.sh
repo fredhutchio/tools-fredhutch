@@ -51,6 +51,8 @@ export PATH="${MATSENGRP}/bin:${PATH}"
 export LD_LIBRARY_PATH="${MATSENGRP}/lib:${MATSENGRP}/lib64:${MATSENGRP}/lib64/R/lib:${LD_LIBRARY_PATH}"
 export PERL5LIB="${MATSENGRP}/lib/perl5:${PERL5LIB}"
 
+xargs -n 1 -0 < /proc/self/environ > env.log
+
 set -u
 
 START_TIME=$(timer)

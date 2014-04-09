@@ -1,0 +1,92 @@
+<tool id="CFAR_hyperfreq" name="Analyze sequences" version="1.0.0">
+  <description>for hypermutation using Bayesian analysis</description>
+  <macros>
+    <import>macros.xml</import>
+  </macros>
+  <version_command>hyperfreq -v</version_command>
+  <command interpreter="bash">
+    hyperfreq-wrapper.sh ${config}
+  </command>
+  <stdio>
+    <expand macro="basic_errors"/>
+  </stdio>
+  <inputs>
+    <param name="alignment" type="data" format="fasta" label="Sequence alignment on which to operate"/>
+    <param name="context_selector" type="select" display="checkboxes" multiple="true" label="Hypermutation context" help="For example, 'GG' specifies a focus pattern of GG to AG, characteristic of APOBEC3G activity. Characters M, R and V correspond to IUPAC codes.">
+      <option value="GG" selected="true">GG</option>
+      <option value="GV">GV</option>
+      <option value="GR">GR</option>
+      <option value="GA">GA</option>
+      <option value="GM">GM</option>
+      <option value="naive">naive</option>
+    </param>
+    <param name="sig_level" type="float" label="Significance level" value="0.05" min="0.0" max="1.0" help="For hm_pos determination: if, with this specified level of confidence, a sequence has a RPR higher than the specified rpr_cutoff, it will be marked as hypermutation positive."/>
+    <conditional name="reference_source">
+      <param name="reference_source_selector" type="select" label="Reference source">
+        <option value="consensus" selected="true">Use consensus sequence constructed from the entire alignment</option>
+        <option value="cluster">Use consensus sequeunces for clusters in a cluster file</option>
+        <option value="manual">Manually specify reference sequence(s)</option>
+      </param>
+      <when value="consensus">
+        <!-- do nothing -->
+      </when>
+      <when value="cluster">
+        <param name="ref_file" type="data" format="csv" label="Sequence-to-cluster map" help="CSV file mapping sequences to clusters; cluster consensus sequences will be used as query sequences. Any sequences not mapped to a cluster will be implicity put in an 'all' cluster."/>
+      </when>
+      <when value="manual">
+        <param name="ref_file" type="data" format="fasta" label="Reference sequence(s)" help="Sequence name(s) should correspond to cluster names if using a cluster map. Otherwise, ensure a sequence named 'all' is included in the alignment. Clusters for which no reference sequence is specified will be compared to a computed consensus sequence."/>
+      </when>
+    </conditional>
+  </inputs>
+  <outputs>
+    <data name="calls" format="csv" label="Calls"/>
+    <data name="sites" format="csv" label="Sites"/>
+    <data name="log" format="txt" label="Analysis log"/>
+  </outputs>
+  <configfiles>
+    <configfile name="config">
+ALIGNMENT="${alignment}"
+CONTEXTS="${context_selector}"
+SIG_LEVEL="${sig_level}"
+
+#if $reference_source.reference_source_selector == "cluster"
+REFERENCE="-c $reference_source.ref_file"
+#else if $reference_source.reference_source_selector == "manual"
+REFERENCE="-r $reference_source.ref_file"
+#else
+REFERENCE=""
+#end if
+
+CALLS="${calls}"
+SITES="${sites}"
+LOG="${log}"
+    </configfile>
+  </configfiles>
+
+  <!-- The contents of the help tag is parsed as reStructuredText. Please see
+       help-template.rst for examples of commonly-used sections in other Galaxy
+       tools. -->
+  <help>
+
+.. class:: infomark
+
+**What it does**
+
+``hyperfreq`` is a Bayesian APOBEC3G-induced hypermutation analysis
+tool implemented in Python.
+
+Hyperfreq requires each query sequence have a reference sequence for
+comparison. This sequence should be evolutionarily close while not
+exhibiting a hypermutation pattern. By default, hyperfreq computes
+this sequence as global consensus from the query alignment. You can
+also manually specify reference sequences or compute them from
+clusters of sequences.
+
+Use hyperfreq's iterative clustering strategy to find reference
+sequences. This involves iterations of hypermutation analysis, removal
+of hypermutated columns from alignment, and clustering of these 'HM
+free' alignments, so that clusters don't reflect hypermutation within
+the data.
+
+  </help>
+</tool>

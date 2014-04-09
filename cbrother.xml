@@ -1,5 +1,5 @@
-<tool id="CFAR_cbrother" name="Analyze sequences" version="1.0.0">
-  <description>for recombination using Bayesian analysis</description>
+<tool id="CFAR_cbrother" name="Analyze sequences for recombination" version="1.0.0">
+  <description>using Bayesian analysis with cbrother</description>
   <macros>
     <import>macros.xml</import>
   </macros>

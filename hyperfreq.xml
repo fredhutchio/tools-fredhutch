@@ -1,5 +1,5 @@
-<tool id="CFAR_hyperfreq" name="Analyze sequences" version="1.0.0">
-  <description>for hypermutation using Bayesian analysis</description>
+<tool id="CFAR_hyperfreq" name="Analyze sequences for hypermutation" version="1.0.0">
+  <description>using Bayesian analysis with hyperfreq</description>
   <macros>
     <import>macros.xml</import>
   </macros>

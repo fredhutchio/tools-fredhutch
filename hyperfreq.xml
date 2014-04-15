@@ -12,7 +12,12 @@
   </stdio>
   <inputs>
     <param name="alignment" type="data" format="fasta" label="Sequence alignment on which to operate"/>
-    <param name="context_selector" type="select" display="checkboxes" multiple="true" label="Hypermutation context" help="For example, 'GG' specifies a focus pattern of GG to AG, characteristic of APOBEC3G activity. Characters M, R and V correspond to IUPAC codes.">
+    <param name="context_selector" type="select" display="checkboxes" multiple="true" label="Hypermutation context" help=
+      "Specifies analysis hypermutation pattern(s).
+      For example, 'GG' specifies a focus pattern of GG -> AG, characteristic of APOBEC3G activity.
+      Characters M, R and V correspond to IUPAC ambiguous nucleotide codes.
+      So for example, specifying GR looks for an elevation in GG -> AG and GA -> AA mutation rates over GT -> AT and GC -> AC mutation rates.
+      It is possible that a sequence with both APOBEC3G and APOBEC3F hypermutation might be GG and GA negative, but GR positive, providing motivations for these pattern options.">
       <option value="GG" selected="true">GG</option>
       <option value="GV">GV</option>
       <option value="GR">GR</option>

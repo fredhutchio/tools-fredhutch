@@ -8,4 +8,7 @@ CONTEXTS="$(echo ${CONTEXTS} | sed 's/,/ /g')"
 hyperfreq analyze ${ALIGNMENT} -p ${CONTEXTS} -s ${SIG_LEVEL} ${REFERENCE}
 cp hm_analysis.call.csv ${CALLS}
 cp hm_analysis.sites.csv ${SITES}
-cp hm_analysis.log ${LOG}
+
+hyperfreq split ${ALIGNMENT} ${SITES}
+cp hm_split.pos.fasta ${HM_POS_ALN}
+cp hm_split.neg.fasta ${HM_NEG_ALN}

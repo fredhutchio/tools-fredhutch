@@ -12,18 +12,13 @@
   </stdio>
   <inputs>
     <param name="alignment" type="data" format="fasta" label="Sequence alignment on which to operate"/>
-    <param name="context_selector" type="select" display="checkboxes" multiple="true" label="Hypermutation context" help=
-      "Specifies analysis hypermutation pattern(s).
-      For example, 'GG' specifies a focus pattern of GG -> AG, characteristic of APOBEC3G activity.
-      Characters M, R and V correspond to IUPAC ambiguous nucleotide codes.
-      So for example, specifying GR looks for an elevation in GG -> AG and GA -> AA mutation rates over GT -> AT and GC -> AC mutation rates.
-      It is possible that a sequence with both APOBEC3G and APOBEC3F hypermutation might be GG and GA negative, but GR positive, providing motivations for these pattern options.">
-      <option value="GG" selected="true">GG</option>
-      <option value="GV">GV</option>
-      <option value="GR">GR</option>
-      <option value="GA">GA</option>
-      <option value="GM">GM</option>
-      <option value="naive">naive</option>
+    <param name="context_selector" type="select" display="checkboxes" multiple="true" label="Hypermutation context" help="Specifies analysis hypermutation pattern(s). For example, 'GG' specifies a focus pattern of GG &#8594; AG, characteristic of APOBEC3G activity. Characters M, R and V correspond to IUPAC ambiguous nucleotide codes. So for example, specifying GR looks for an elevation in GG &#8594; AG and GA &#8594; AA mutation rates over GT &#8594; AT and GC &#8594; AC mutation rates. It is possible that a sequence with both APOBEC3G and APOBEC3F hypermutation might be GG and GA negative, but GR positive, providing motivations for these pattern options.">
+      <option value="GG" selected="true">GG (APOBEC3G) </option>
+      <option value="GA">GA (APOBEC3F and some other APOBECs)</option>
+      <option value="GR">GR (APOBEC3G and APOBEC3F)</option>
+      <option value="GM">GM (rhesus macaque APOBEC3DE)</option>
+      <option value="GV">GV (any APOBEC3)</option>
+      <option value="naive">naive (non-context-based)</option>
     </param>
     <param name="sig_level" type="float" label="Significance level" value="0.05" min="0.0" max="1.0" help="For hm_pos determination: if, with this specified level of confidence, a sequence has a RPR higher than the specified rpr_cutoff, it will be marked as hypermutation positive."/>
     <conditional name="reference_source">
@@ -31,6 +26,7 @@
         <option value="consensus" selected="true">Use consensus sequence constructed from the entire alignment</option>
         <option value="cluster">Use consensus sequeunces for clusters in a cluster file</option>
         <option value="manual">Manually specify reference sequence(s)</option>
+        <option value="automatic">Use automated clustering for consensus sequences</option>
       </param>
       <when value="consensus">
         <!-- do nothing -->
@@ -40,13 +36,19 @@
       </when>
       <when value="manual">
         <param name="ref_file" type="data" format="fasta" label="Reference sequence(s)" help="Sequence name(s) should correspond to cluster names if using a cluster map. Otherwise, ensure a sequence named 'all' is included in the alignment. Clusters for which no reference sequence is specified will be compared to a computed consensus sequence."/>
+        <param name="cluster_map" type="data" format="csv" label="Sequence-to-cluster map" help="CSV file mapping sequences to clusters; cluster consensus sequences will be used as query sequences. Any sequences not mapped to a cluster will be implicitly put in an 'all' cluster."/>
+      </when>
+      <when value="automatic">
+        <param name="cluster_threshold" type="float" value="0.025"  label="Cluster threshold"/>
+        <param name="min_per_cluster" type="integer" value="5" label="Min per cluster"/>
       </when>
     </conditional>
   </inputs>
   <outputs>
-    <data name="calls" format="csv" label="Calls"/>
-    <data name="sites" format="csv" label="Sites"/>
-    <data name="log" format="txt" label="Analysis log" hidden="true"/>
+    <data name="calls" format="csv" label="Hypermutation analysis"/>
+    <data name="sites" format="csv" label="Hypermutation sites"/>
+    <data name="hm_pos_aln" format="fasta" label="Hypermutation-positive alignment"/>
+    <data name="hm_neg_aln" format="fasta" label="Hypermutation-negative alignment"/>
   </outputs>
   <configfiles>
     <configfile name="config">
@@ -64,7 +66,8 @@ REFERENCE=""
 
 CALLS="${calls}"
 SITES="${sites}"
-LOG="${log}"
+HM_POS_ALN="${hm_pos_aln}"
+HM_NEG_ALN="${hm_neg_aln}"
     </configfile>
   </configfiles>
 
@@ -87,11 +90,11 @@ this sequence as global consensus from the query alignment. You can
 also manually specify reference sequences or compute them from
 clusters of sequences.
 
-Use hyperfreq's iterative clustering strategy to find reference
-sequences. This involves iterations of hypermutation analysis, removal
-of hypermutated columns from alignment, and clustering of these 'HM
-free' alignments, so that clusters don't reflect hypermutation within
-the data.
+TODO description of output files
+
+**Citation**
+
+
 
   </help>
 </tool>

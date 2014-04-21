@@ -25,21 +25,29 @@
       <option value="GM">GM</option>
       <option value="naive">naive</option>
     </param>
-    <param name="sig_level" type="float" label="Significance level" value="0.05" min="0.0" max="1.0" help="For hm_pos determination: if, with this specified level of confidence, a sequence has a RPR higher than the specified rpr_cutoff, it will be marked as hypermutation positive."/>
+    <param name="sig_level" type="float" label="Significance level" value="0.05" min="0.0" max="1.0"
+      help="For deciding whether sequences are hypermutated:
+      If - with the specified confidence - the probability of observing G -> A mutations in a context associated with hypermutation activity is greater than the probability of observing such mutations in other contexts, the sequence will be marked as hypermutated."/>
     <conditional name="reference_source">
-      <param name="reference_source_selector" type="select" label="Reference source">
+      <param name="reference_source_selector" type="select" label="Reference source"
+        help="">
         <option value="consensus" selected="true">Use consensus sequence constructed from the entire alignment</option>
         <option value="cluster">Use consensus sequeunces for clusters in a cluster file</option>
         <option value="manual">Manually specify reference sequence(s)</option>
       </param>
       <when value="consensus">
         <!-- do nothing -->
+        <help>Take the consensus sequence of the input alignment as the reference sequence for all query sequences.</help>
       </when>
       <when value="cluster">
-        <param name="ref_file" type="data" format="csv" label="Sequence-to-cluster map" help="CSV file mapping sequences to clusters; cluster consensus sequences will be used as query sequences. Any sequences not mapped to a cluster will be implicitly put in an 'all' cluster."/>
+        <param name="ref_file" type="data" format="csv" label="Sequence-to-cluster map"
+          help="CSV file mapping sequences to clusters; cluster consensus sequences will be used as query sequences. Any sequences not mapped to a cluster will be implicitly put in an 'all' cluster."/>
       </when>
       <when value="manual">
-        <param name="ref_file" type="data" format="fasta" label="Reference sequence(s)" help="Sequence name(s) should correspond to cluster names if using a cluster map. Otherwise, ensure a sequence named 'all' is included in the alignment. Clusters for which no reference sequence is specified will be compared to a computed consensus sequence."/>
+        <param name="ref_file" type="data" format="fasta" label="Reference sequence(s)"
+          help="Reference sequences must be in alignment with query sequences, and reference sequence names should correspond to cluster names if using a cluster map.
+          If not using a cluster map, ensure a sequence named 'all' is included in the alignment.
+          Clusters for which no reference sequence is specified will be compared to a computed consensus sequence."/>
       </when>
     </conditional>
   </inputs>

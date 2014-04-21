@@ -25,7 +25,10 @@
       If - with the specified confidence - the probability of observing G -> A mutations in a context associated with hypermutation activity is greater than the probability of observing such mutations in other contexts, the sequence will be marked as hypermutated."/>
     <conditional name="reference_source">
       <param name="reference_source_selector" type="select" label="Reference source"
-        help="">
+        help="Each query sequence must have a reference sequence for comparison.
+        This sequence should be evolutionarily close to the query sequence while not exhibiting a hypermutation pattern.
+        For guidance in choosing a reference sequence strategy, see the `hyperfreq wiki`_.
+        .. _hyperfreq wiki: https://github.com/fhcrc/hyperfreq/wiki/Reference-sequence-strategies">
         <option value="consensus" selected="true">Global consensus sequence</option>
         <option value="cluster">Cluster consensus sequences</option>
         <option value="manual">Manually specify reference sequence(s)</option>
@@ -33,7 +36,7 @@
       </param>
       <when value="consensus">
         <!-- do nothing -->
-        <p>Take the consensus sequence of the input alignment as the reference sequence for all query sequences.</p>
+        Take the consensus sequence of the input alignment as the reference sequence for all query sequences.
       </when>
       <when value="cluster">
         <param name="ref_file" type="data" format="csv" label="Sequence-to-cluster map"

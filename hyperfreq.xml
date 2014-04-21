@@ -33,7 +33,7 @@
       </param>
       <when value="consensus">
         <!-- do nothing -->
-        <help>Take the consensus sequence of the input alignment as the reference sequence for all query sequences.</help>
+        <p>Take the consensus sequence of the input alignment as the reference sequence for all query sequences.</p>
       </when>
       <when value="cluster">
         <param name="ref_file" type="data" format="csv" label="Sequence-to-cluster map"

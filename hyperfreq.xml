@@ -26,10 +26,10 @@
     <conditional name="reference_source">
       <param name="reference_source_selector" type="select" label="Reference source"
         help="">
-        <option value="consensus" selected="true">Use consensus sequence constructed from the entire alignment</option>
-        <option value="cluster">Use consensus sequeunces for clusters in a cluster file</option>
+        <option value="consensus" selected="true">Global consensus sequence</option>
+        <option value="cluster">Cluster consensus sequences</option>
         <option value="manual">Manually specify reference sequence(s)</option>
-        <option value="automatic">Use automated clustering for consensus sequences</option>
+        <option value="automatic">Automated clustering consensus sequences</option>
       </param>
       <when value="consensus">
         <!-- do nothing -->

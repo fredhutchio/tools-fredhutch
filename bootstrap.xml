@@ -17,6 +17,7 @@
         <option value="junior">Junior</option>
         <option value="senior">Senior</option>
       </param>
+      <when value="junior"></when>
       <when value="senior">
         <param name="zone_id" type="integer" value="1" label="Zone number"/>
       </when>

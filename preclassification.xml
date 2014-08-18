@@ -1,4 +1,4 @@
-<tool id="PHYLO_preclassification" name="Generate database" version="1.1.0">
+<tool id="PHYLO_preclassification" name="Generate database" version="1.2.0">
   <description>for classification</description>
   <macros>
     <import>macros.xml</import>
@@ -13,18 +13,18 @@
   <inputs>
     <param name="dedup_info" type="data" format="csv" label="Deduplication info"/>
     <param name="refpkg" type="data" format="refpkg" label="Reference package"/>
-    <param name="filtered_seqs" type="data" format="fasta" label="Filtered sequences"/>
+    <param name="nbc_seqs" type="data" format="fasta" label="Query alignment" help="The query alignment specified here should be the same as the one passed to pplacer."/>
     <param name="placed_seqs" type="data" format="jplace" label="Placements"/>
   </inputs>
   <outputs>
     <data name="reduped_seqs" format="jplace" label="Reduped placements"/>
-    <data name="class_db" format="sqlite3" label="Classification database"/>
+    <data name="class_db" format="sqlite3" label="Placement database"/>
   </outputs>
   <configfiles>
     <configfile name="config">
 DEDUP_INFO="${dedup_info}"
 REFPKG="${refpkg.extra_files_path}"
-FILTERED_SEQS="${filtered_seqs}"
+NBC_SEQS="${nbc_seqs}"
 PLACED_SEQS="${placed_seqs}"
 
 REDUPED_SEQS="${reduped_seqs}"

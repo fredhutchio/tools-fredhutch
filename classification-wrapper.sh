@@ -5,11 +5,9 @@ source $1
 
 classif_table.py \
     --specimen-map ${SPLIT_MAP} \
+    --metadata-map ${LABEL_MAP} \
     --rank ${WANT_RANK} \
-    --tallies-wide ${BY_SPECIMEN} \
-    --by-specimen groupBySpecimen.csv \
+    --tallies-wide ${TALLIES_WIDE} \
+    --by-specimen ${BY_SPECIMEN} \
     ${CLASS_DB} \
     ${BY_TAXON}
-
-csvjoin -c "specimen" ${LABEL_MAP} groupBySpecimen.csv | \
-    csvcut -C 3 > ${GROUP_BY_SPECIMEN}

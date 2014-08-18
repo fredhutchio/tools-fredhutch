@@ -4,7 +4,7 @@ source $(dirname $0)/util.sh
 source $1
 
 PLACED_SEQS=$(extify jplace ${PLACED_SEQS})
-FILTERED_SEQS=$(extify fasta ${FILTERED_SEQS})
+NBC_SEQS=$(extify fasta ${NBC_SEQS})
 
 guppy redup \
     -m \
@@ -19,12 +19,12 @@ rppr prep_db \
     --sqlite ${CLASS_DB}
 
 guppy classify \
-    --pp \
     -c ${REFPKG} \
+    -j ${GALAXY_SLOTS:-4} \
+    --pp \
     --sqlite ${CLASS_DB} \
     --classifier hybrid2 \
-    --nbc-sequences ${FILTERED_SEQS} \
-    --no-pre-mask \
+    --nbc-sequences ${NBC_SEQS} \
     ${REDUPED_SEQS}
 
-multiclass_concat.py ${CLASS_DB}
+multiclass_concat.py --dedup-info ${DEDUP_INFO} ${CLASS_DB}

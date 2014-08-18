@@ -1,4 +1,4 @@
-<tool id="PHYLO_classification" name="Output classifications" version="2.0.0">
+<tool id="PHYLO_classification" name="Output classifications" version="2.1.0">
   <description>in tabular format</description>
   <macros>
     <import>macros.xml</import>
@@ -13,7 +13,7 @@
   <inputs>
     <param name="split_map" type="data" format="csv" label="Read-to-specimen map"/>
     <param name="label_map" type="data" format="csv" label="Specimen-to-label map"/>
-    <param name="class_db" type="data" format="sqlite3" label="Classification database"/>
+    <param name="class_db" type="data" format="sqlite3" label="Placement database"/>
     <param name="want_rank" type="select" label="Desired classification rank">
       <option value="species" selected="true">Species</option>
       <option value="genus">Genus</option>
@@ -26,7 +26,7 @@
   <outputs>
     <data name="by_taxon" format="csv" label="By-taxon classification"/>
     <data name="by_specimen" format="csv" label="By-specimen classification"/>
-    <data name="group_by_specimen" format="csv" label="Grouped-by-specimen classification"/>
+    <data name="tallies_wide" format="csv" label="Tallies-wide classification"/>
   </outputs>
   <configfiles>
     <configfile name="config">
@@ -37,7 +37,7 @@ WANT_RANK="${want_rank}"
 
 BY_TAXON="${by_taxon}"
 BY_SPECIMEN="${by_specimen}"
-GROUP_BY_SPECIMEN="${group_by_specimen}"
+TALLIES_WIDE="${tallies_wide}"
     </configfile>
   </configfiles>
   <!-- The contents of the help tag is parsed as reStructuredText. Please see

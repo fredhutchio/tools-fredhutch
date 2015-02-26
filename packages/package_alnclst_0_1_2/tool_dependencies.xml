@@ -38,11 +38,13 @@
           <environment_variable action="prepend_to" name="PATH">$ENV[PATH_SCIPY]</environment_variable>
           <environment_variable action="prepend_to" name="PYTHONPATH">$ENV[PYTHONPATH_BIOPYTHON]</environment_variable>
           <environment_variable action="set_to" name="PYTHONPATH_ALNCLST">$INSTALL_DIR/lib/python</environment_variable>
+          <environment_variable action="set_to" name="PATH_ALNCLST">$INSTALL_DIR/bin</environment_variable>
         </action>
       </actions>
     </install>
     <readme>
       The PYTHONPATH for alnclst can be accessed through PYTHONPATH_ALNCLST.
+      The PATH for alnclst can be accessed through PATH_ALNCLST.
       For more information, see https://github.com/fhcrc/alnclst
     </readme>
   </package>

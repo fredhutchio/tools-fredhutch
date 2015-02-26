@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<tool_dependency>
+  <package name="mpmath" version="0.19">
+    <install version="1.0">
+      <actions>
+        <action type="download_by_url">https://pypi.python.org/packages/source/m/mpmath/mpmath-0.19.tar.gz#md5=af5cc956b2673b33a25c3e57299bae7b</action>
+        <action type="make_directory">$INSTALL_DIR/lib/python</action>
+        <action type="template_command">
+          export PYTHONPATH=$PYTHONPATH:$INSTALL_DIR/lib/python &amp;&amp;
+          python setup.py install --install-lib $INSTALL_DIR/lib/python
+        </action>
+        <action type="set_environment">
+          <environment_variable action="prepend_to" name="PYTHONPATH">$INSTALL_DIR/lib/python</environment_variable>
+          <environment_variable action="set_to" name="PYTHONPATH_MPMATH">$INSTALL_DIR/lib/python</environment_variable>
+        </action>
+      </actions>
+    </install>
+    <readme>
+      The PYTHONPATH for mpmath can be accessed through PYTHONPATH_MPMATH.
+      For more information, see https://pypi.python.org/pypi/mpmath/0.19
+    </readme>
+  </package>
+</tool_dependency>

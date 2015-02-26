@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+<tool_dependency>
+  <package name="biopython" version="1.65">
+    <repository name="package_biopython_1_65" owner="biopython" prior_installation_required="True"/>
+  </package>
+  <package name="fisher" version="0.1.4">
+    <repository name="package_fisher_0_1_4" owner="bcclaywell" prior_installation_required="True"/>
+  </package>
+  <package name="betarat" version="1.0.0">
+    <repository name="package_betarat_1_0_0" owner="bcclaywell" prior_installation_required="True"/>
+  </package>
+  <package name="alnclst" version="0.1.2">
+    <repository name="package_alnclst_0_1_2" owner="bcclaywell" prior_installation_required="True"/>
+  </package>
+  <package name="hyperfreq" version="1.2.0">
+    <install version="1.0">
+      <actions>
+        <action type="download_by_url">https://github.com/fhcrc/hyperfreq/archive/v1.2.0.tar.gz</action>
+        <action type="set_environment_for_install">
+          <repository name="package_biopython_1_65" owner="biopython">
+            <package name="biopython" version="1.65" />
+          </repository>
+          <repository name="package_fisher_0_1.4" owner="bcclaywell">
+            <package name="fisher" version="0.1.4" />
+          </repository>
+          <repository name="package_betarat_1_0_0" owner="bcclaywell">
+            <package name="betarat" version="1.0.0" />
+          </repository>
+          <repository name="package_alnclst_0_1_2" owner="bcclaywell">
+            <package name="alnclst" version="0.1.2" />
+          </repository>
+        </action>
+        <action type="make_directory">$INSTALL_DIR/lib/python</action>
+        <action type="template_command">
+          export PYTHONPATH=$PYTHONPATH:$INSTALL_DIR/lib/python &amp;&amp;
+          python setup.py install --install-lib $INSTALL_DIR/lib/python
+        </action>
+        <action type="set_environment">
+          <environment_variable action="prepend_to" name="PYTHONPATH">$INSTALL_DIR/lib/python</environment_variable>
+          <environment_variable action="prepend_to" name="PATH">$INSTALL_DIR/bin</environment_variable>
+          <environment_variable action="prepend_to" name="PYTHONPATH">$ENV[PYTHONPATH_BIOPYTHON]</environment_variable>
+          <environment_variable action="prepend_to" name="PYTHONPATH">$ENV[PYTHONPATH_FISHER]</environment_variable>
+          <environment_variable action="prepend_to" name="PYTHONPATH">$ENV[PYTHONPATH_BETARAT]</environment_variable>
+          <environment_variable action="prepend_to" name="PATH">$ENV[PATH_BETARAT]</environment_variable>
+          <environment_variable action="prepend_to" name="PYTHONPATH">$ENV[PYTHONPATH_ALNCLST]</environment_variable>
+          <environment_variable action="prepend_to" name="PATH">$ENV[PATH_ALNCLST]</environment_variable>
+          <environment_variable action="set_to" name="PYTHONPATH_HYPERFREQ">$INSTALL_DIR/lib/python</environment_variable>
+          <environment_variable action="set_to" name="PATH_HYPERFREQ">$INSTALL_DIR/bin</environment_variable>
+        </action>
+      </actions>
+    </install>
+    <readme>
+      The PYTHONPATH for hyperfreq can be accessed through PYTHONPATH_HYPERFREQ.
+      The PATH for hyperfreq can be accessed through PATH_HYPERFREQ.
+      For more information, see https://github.com/fhcrc/hyperfreq
+    </readme>
+  </package>
+</tool_dependency>

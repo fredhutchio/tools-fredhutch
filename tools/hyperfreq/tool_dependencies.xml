@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<tool_dependency>
+  <package name="hyperfreq" version="1.2.0">
+    <repository name="package_hyperfreq_1_2_0" owner="bcclaywell" />
+  </package>
+</tool_dependency>

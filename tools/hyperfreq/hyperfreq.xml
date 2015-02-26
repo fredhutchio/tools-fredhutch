@@ -1,0 +1,149 @@
+<tool id="CFAR_hyperfreq" name="Analyze sequences for hypermutation" version="1.0.0">
+  <description>using Bayesian analysis with hyperfreq</description>
+  <requirements>
+    <requirement type="package" version="1.2.0">hyperfreq</requirement>
+  </requirements>
+  <macros>
+    <import>macros.xml</import>
+  </macros>
+  <version_command>hyperfreq -v</version_command>
+  <command interpreter="bash">
+    hyperfreq-wrapper.sh ${config}
+  </command>
+  <stdio>
+    <expand macro="basic_errors"/>
+  </stdio>
+  <inputs>
+    <param name="alignment" type="data" format="fasta" label="Sequence alignment on which to operate"/>
+    <param name="context_selector" type="select" display="checkboxes" multiple="true" label="Hypermutation context"
+      help="Specify analysis hypermutation pattern(s).
+      Characters M, R and V correspond to IUPAC ambiguous nucleotide codes.
+      For example, specifying GR looks for an elevation in combined G[G or A] &#8594; A[G or A] mutation rates over G[T or C] &#8594; A[T or C] mutation rates.
+      (A sequence with low levels of APOBEC3G and APOBEC3F hypermutation might be GG and GA negative, but GR positive.)">
+      <option value="GG" selected="true">GG (APOBEC3G) </option>
+      <option value="GA">GA (APOBEC3F and some other APOBECs)</option>
+      <option value="GR">GR (APOBEC3G and APOBEC3F)</option>
+      <option value="GM">GM (rhesus macaque APOBEC3DE)</option>
+      <option value="GV">GV (any APOBEC3)</option>
+      <option value="naive">naive (non-context-based)</option>
+    </param>
+    <param name="sig_level" type="float" label="Significance level" value="0.05" min="0.0" max="1.0"
+      help="If - with the specified confidence - G &#8594; A mutations in a hypermutation-associated context are more likely than G &#8594; A mutations in other contexts, the sequence will be marked as hypermutated."/>
+    <conditional name="reference_source">
+      <param name="reference_source_selector" type="select" label="Reference source"
+        help="Each query sequence must have a reference sequence for comparison.
+        For guidance choosing a reference sequence strategy, see https://github.com/fhcrc/hyperfreq/wiki/Reference-sequence-strategies.">
+        <option value="consensus" selected="true">Global consensus sequence</option>
+        <option value="cluster">Cluster consensus sequences</option>
+        <option value="manual">Manually specify reference sequence(s)</option>
+        <option value="automatic">Automated clustering consensus sequences</option>
+      </param>
+      <when value="consensus">
+        <!-- do nothing -->
+      </when>
+      <when value="cluster">
+        <param name="ref_file" type="data" format="csv" label="Sequence-to-cluster map"
+          help="CSV file mapping sequences to clusters. Cluster consensus sequences will be used as query sequences. Sequences wihtout a cluster will be automatically put in a cluster named 'all'."/>
+      </when>
+      <when value="manual">
+        <param name="ref_file" type="data" format="fasta" label="Reference sequence(s)"
+          help="FASTA file of reference sequences; Must be in alignment with query sequences, and sequence names should correspond to cluster names if using a cluster map.
+          If not using a cluster map, ensure a sequence named 'all' is included in the alignment.
+          Clusters for which no reference sequence is specified will be compared to a computed consensus sequence."/>
+        <param name="cluster_map" type="data" format="csv" label="Sequence-to-cluster map"
+          help="CSV file mapping sequences to clusters. Any sequences not mapped to a cluster will be implicitly put in an 'all' cluster."/>
+      </when>
+      <when value="automatic">
+        <param name="cluster_threshold" type="float" value="0.025"  label="Cluster threshold"
+          help="Triggers the automated, hypermutation aware clustering (see wiki); Measured as the normalized Hamming distance between sequences."/>
+        <param name="min_per_cluster" type="integer" value="5" label="Min number of sequences per cluster"
+          help="Smaller clusters are merged with larger ones to avoid clusters composed mostly of hypermutated sequences.
+          (Suggested: at least 2x+1, x being the maximum number of sequeces from any given specimen.)"/>
+      </when>
+    </conditional>
+  </inputs>
+  <outputs>
+    <data name="calls" format="csv" label="Hypermutation analysis"/>
+    <data name="sites" format="csv" label="Hypermutation sites"/>
+    <data name="hm_pos_aln" format="fasta" label="Hypermutation-positive alignment"/>
+    <data name="hm_neg_aln" format="fasta" label="Hypermutation-negative alignment"/>
+  </outputs>
+  <configfiles>
+    <configfile name="config">
+ALIGNMENT="${alignment}"
+CONTEXTS="${context_selector}"
+SIG_LEVEL="${sig_level}"
+
+#if $reference_source.reference_source_selector == "cluster"
+REFERENCE="-c $reference_source.ref_file"
+#else if $reference_source.reference_source_selector == "manual"
+REFERENCE="-r $reference_source.ref_file"
+#else
+REFERENCE=""
+#end if
+
+CALLS="${calls}"
+SITES="${sites}"
+HM_POS_ALN="${hm_pos_aln}"
+HM_NEG_ALN="${hm_neg_aln}"
+    </configfile>
+  </configfiles>
+
+  <!-- The contents of the help tag is parsed as reStructuredText. Please see
+       help-template.rst for examples of commonly-used sections in other Galaxy
+       tools. -->
+  <help>
+
+.. class:: infomark
+
+
+What it does
+------------
+
+Hyperfreq is a APOBEC3-induced hypermutation analysis tool.
+It is context-based, analyzing whether G -> A mutations are more likely in contexts associated with APOBEC3 hypermutation than in other contexts (APOBEC3G for instance is more likely to mutate GG -> AG than G followed by anything other than G).
+While other tools take a similar approach, Hyperfreq uses Bayesian statistics, making it more sensitive, informative and flexible.
+
+Considerations in choosing a Reference source
+---------------------------------------------
+
+As described above, each query sequence must be compared to a reference sequence.
+These references should be evolutionarily close to query sequences, while not exhibiting a hypermutation pattern.
+Hyperfreq comes bundled with several strategies for assigning reference sequences.
+
+As the concerns associated with reference sequence strategies are rather involved, we refer you to the online `wiki documentation`_ for more information.
+
+Output files
+------------
+
+This tool produces four output files.
+
+:Hypermutation analysis: CSV file with statistical results.
+:Hypermutation sites: CSV file with positions of sites and sequences within the alignment suspected of hypermutation.
+:Hypermutation-positive alignment: FASTA alignment containing only sites suspected of hypermutation.
+:Hypermutation-negative alignment: FASTA alignment containing only sites not suspected of hypermutation (can be used in downstream phylogenetic/sequence analyses, avoiding the influence of hypermutation on inferences)
+
+
+Some details about the Hypermutation analysis output
+----------------------------------------------------
+
+:sequence: query sequence name
+:hm_pos: whether the sequence is considered postive for hypermutation at the specified significance level
+:call_pattern: if a sequence is found to be positive for multiple patterns, this indicates the pattern for which the hypermutation signal (as measured by the MAP value, below) was strongest
+:cutoff_cdf: roughly speaking, the Bayesian equivalent of a P-value for the hypothesis that there is more G to A mutation in APOBEC associated contexts than in other contexts
+:map: The Maximum A Posteriori, which can be interpreted as the best estimate of the effect size (relative probability of observing mutations in APOBEC contexts than other contexts)
+:focus_pos, focus_neg, control_pos, control_neg: G &#8594; A mutation (pos) and non G &#8594; A mutation (neg; either another mutation or no mutation) counts in the focus (APOBEC-associated) and control contexts
+
+
+Citation
+--------
+
+Matsen FA IV, Small CT, Soliven K, Engel GA, Feeroz MM, et al. (2014) `A Novel Bayesian Method for Detection of APOBEC3-Mediated Hypermutation and Its Application to Zoonotic Transmission of Simian Foamy Viruses`_. PLoS Comput Biol 10(2): e1003493. doi:10.1371/journal.pcbi.1003493
+
+
+.. _wiki documentation: https://github.com/fhcrc/hyperfreq/wiki/Reference-sequence-strategies
+.. _A Novel Bayesian Method for Detection of APOBEC3-Mediated Hypermutation and Its Application to Zoonotic Transmission of Simian Foamy Viruses: http://www.ploscompbiol.org/article/info:doi/10.1371/journal.pcbi.1003493
+
+
+  </help>
+</tool>

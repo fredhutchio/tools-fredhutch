@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8'?>
+<tool_dependency>
+  <package name="numpy" version="1.9">
+    <repository name="package_numpy_1_9" owner="iuc" prior_installation_required="True"/>
+  </package>
+  <package name="scipy" version="0.14">
+    <repository name="package_scipy_0_14" owner="iuc" prior_installation_required="True"/>
+  </package>
+  <package name="biopython" version="1.65">
+    <repository name="package_biopython_1_65" owner="biopython" prior_installation_required="True"/>
+  </package>
+  <package name="alnclst" version="0.1.2">
+    <install version="1.0">
+      <actions>
+        <action type="download_by_url">https://github.com/fhcrc/alnclst/archive/v0.1.2.tar.gz</action>
+        <action type="set_environment_for_install">
+          <repository name="package_numpy_1_9" owner="iuc">
+            <package name="numpy" version="1.9" />
+          </repository>
+          <repository name="package_scipy_0_14" owner="iuc">
+            <package name="scipy" version="0.14" />
+          </repository>
+          <repository name="package_biopython_1_65" owner="biopython">
+            <package name="biopython" version="1.65" />
+          </repository>
+        </action>
+        <action type="make_directory">$INSTALL_DIR/lib/python</action>
+        <action type="template_command">
+          export PYTHONPATH=$PYTHONPATH:$INSTALL_DIR/lib/python &amp;&amp;
+          python setup.py install --install-lib $INSTALL_DIR/lib/python
+        </action>
+        <action type="set_environment">
+          <environment_variable action="prepend_to" name="PYTHONPATH">$INSTALL_DIR/lib/python</environment_variable>
+          <environment_variable action="prepend_to" name="PATH">$INSTALL_DIR/bin</environment_variable>
+          <environment_variable action="prepend_to" name="PYTHONPATH">$ENV[PYTHONPATH_NUMPY]</environment_variable>
+          <environment_variable action="prepend_to" name="PATH">$ENV[PATH_NUMPY]</environment_variable>
+          <environment_variable action="prepend_to" name="PYTHONPATH">$ENV[PYTHONPATH_SCIPY]</environment_variable>
+          <environment_variable action="prepend_to" name="PATH">$ENV[PATH_SCIPY]</environment_variable>
+          <environment_variable action="prepend_to" name="PYTHONPATH">$ENV[PYTHONPATH_BIOPYTHON]</environment_variable>
+          <environment_variable action="set_to" name="PYTHONPATH_ALNCLST">$INSTALL_DIR/lib/python</environment_variable>
+        </action>
+      </actions>
+    </install>
+    <readme>
+      The PYTHONPATH for alnclst can be accessed through PYTHONPATH_ALNCLST.
+      For more information, see https://github.com/fhcrc/alnclst
+    </readme>
+  </package>
+</tool_dependency>

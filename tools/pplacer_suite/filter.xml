@@ -1,0 +1,103 @@
+<tool id="PHYLO_filter" name="Filter and trim" version="1.2.0">
+  <description>sequences</description>
+  <requirements>
+    <requirement type="package">yapp_env</requirement>
+  </requirements>
+  <macros>
+    <import>macros.xml</import>
+  </macros>
+  <version_command>seqmagick --version</version_command>
+  <command interpreter="bash">
+    filter-wrapper.sh ${config}
+  </command>
+  <stdio>
+    <expand macro="basic_errors"/>
+  </stdio>
+  <inputs>
+    <!-- TODO: can take either fasta+qual or fastq -->
+    <param name="plate_id" type="integer" value="1" label="Plate number"/>
+    <param name="zone_id" type="integer" value="1" label="Zone number"/>
+    <param name="raw_seqs" type="data" format="fasta" label="Unfiltered sequences"/>
+    <param name="input_qual" type="data" format="qual" label="Sequence quality data"/>
+    <!-- TODO: handle MID format for multi-sample sequencing; see http://qiime.org/scripts/split_libraries.html -->
+    <param name="barcodes" type="data" format="csv" label="Barcodes"/>
+    <param name="primer" type="text" label="Primer" value="GCGGACTACCVGGGTATCTAAT" area="True" size="1x40"/>
+    <param name="min_length" type="integer" min="100" max="1000" value="350" label="Minimum sequence length"/>
+    <param name="min_quality" type="integer" min="0" max="63" value="35" label="Minimum mean sequence quality"/>
+    <param name="reverse_complement" type="boolean" truevalue="TRUE" falsevalue="FALSE" label="Reads uniformly correspond to negative strands"/>
+  </inputs>
+  <outputs>
+    <data name="filtered_seqs" format="fasta" label="Filtered sequences"/>
+    <data name="filter_report" format="tabular" label="Filtering report"/>
+    <data name="filter_details" format="data" label="Filtering details"/>
+    <data name="split_map" format="csv" label="Read-to-specimen map"/>
+    <data name="seq_qual_report" format="html" label="Sequence quality report"/>
+  </outputs>
+  <configfiles>
+    <configfile name="plate_json">
+{
+  "plate": ${plate_id},
+  "name": "Plate ${plate_id}",
+  "zones": [
+    {
+      "zone": ${zone_id},
+      "cleaning_stats": "${filter_details}"
+    }
+  ]
+}
+    </configfile>
+    <configfile name="config">
+RAW_SEQS="${raw_seqs}"
+INPUT_QUAL="${input_qual}"
+BARCODES="${barcodes}"
+PRIMER="${primer}"
+MIN_LENGTH="${min_length}"
+MIN_QUALITY="${min_quality}"
+REVERSE_COMPLEMENT="${reverse_complement}"
+PLATE_JSON="${plate_json}"
+
+FILTERED_SEQS="${filtered_seqs}"
+FILTER_REPORT="${filter_report}"
+FILTER_DETAILS="${filter_details}"
+SPLIT_MAP="${split_map}"
+SQR="${seq_qual_report}"
+SQR_DIR="${seq_qual_report.files_path}"
+    </configfile>
+  </configfiles>
+  <!-- The contents of the help tag is parsed as reStructuredText. Please see
+       help-template.rst for examples of commonly-used sections in other Galaxy
+       tools. -->
+  <help>
+
+.. class:: infomark
+
+**What it does**
+
+This tool truncates and removes sequences that don’t match a set of quality
+criteria, as well as mapping sequence barcodes to specimens. It takes input
+sequences in FASTA format and a quality file, and outputs the filtered
+sequences as well as a filtering summary and a sequence quality report.
+
+The default quality filter settings are:
+
++---------------------------+------+
+|parameter                  |value |
++===========================+======+
+|--min-length               |350   |
++---------------------------+------+
+|--min-mean-quality         |35    |
++---------------------------+------+
+|--quality-window           |30    |
++---------------------------+------+
+|--quality-window-prop      |0.9   |
++---------------------------+------+
+|--quality-window-mean-qual |15    |
++---------------------------+------+
+
+See seqmagick's `quality filter documentation`_ for full explanations of these
+parameters.
+
+.. _quality filter documentation: http://fhcrc.github.io/seqmagick/quality_filter.html
+
+  </help>
+</tool>

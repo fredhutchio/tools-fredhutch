@@ -1,0 +1,53 @@
+<tool id="PHYLO_pplacer" name="Place aligned sequences" version="1.0.0">
+  <description>on a reference tree</description>
+  <requirements>
+    <requirement type="package">yapp_env</requirement>
+  </requirements>
+  <macros>
+    <import>macros.xml</import>
+  </macros>
+  <version_command>echo "pplacer $(pplacer --version)"</version_command>
+  <command interpreter="bash">
+    pplacer-wrapper.sh ${config}
+  </command>
+  <stdio>
+    <expand macro="basic_errors"/>
+  </stdio>
+  <inputs>
+    <param name="refpkg" type="data" format="refpkg" label="Reference package"/>
+    <param name="query_seqs" type="data" format="fasta" label="Query alignment"/>
+  </inputs>
+  <outputs>
+    <data name="placed_seqs" format="jplace" label="Placed sequences"/>
+  </outputs>
+  <configfiles>
+    <configfile name="config">
+REFPKG="${refpkg.extra_files_path}"
+QUERY_SEQS="${query_seqs}"
+
+PLACED_SEQS="${placed_seqs}"
+    </configfile>
+  </configfiles>
+  <!-- The contents of the help tag is parsed as reStructuredText. Please see
+       help-template.rst for examples of commonly-used sections in other Galaxy
+       tools. -->
+  <help>
+
+.. class:: infomark
+
+**What it does**
+
+This tool places query sequences on a fixed reference phylogenetic tree
+according to a reference alignment, producing taxonomic annotations which can
+be used for classification and visualization.
+
+-----
+
+**Citation**
+
+Matsen F, Kodner R, Armbrust E V: **pplacer: linear time maximum-likelihood and
+Bayesian phylogenetic placement of sequences onto a fixed reference tree**. BMC
+Bioinformatics 2010, **11**:1.
+
+  </help>
+</tool>

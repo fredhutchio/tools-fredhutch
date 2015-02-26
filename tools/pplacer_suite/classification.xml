@@ -1,0 +1,104 @@
+<tool id="PHYLO_classification" name="Output classifications" version="2.1.0">
+  <description>in tabular format</description>
+  <requirements>
+    <requirement type="package">yapp_env</requirement>
+  </requirements>
+  <macros>
+    <import>macros.xml</import>
+  </macros>
+  <version_command>echo "guppy $(guppy --version)"</version_command>
+  <command interpreter="bash">
+    classification-wrapper.sh ${config}
+  </command>
+  <stdio>
+    <expand macro="basic_errors"/>
+  </stdio>
+  <inputs>
+    <param name="split_map" type="data" format="csv" label="Read-to-specimen map"/>
+    <param name="label_map" type="data" format="csv" label="Specimen-to-label map"/>
+    <param name="class_db" type="data" format="sqlite3" label="Placement database"/>
+    <param name="want_rank" type="select" label="Desired classification rank">
+      <option value="species" selected="true">Species</option>
+      <option value="genus">Genus</option>
+      <option value="family">Family</option>
+      <option value="order">Order</option>
+      <option value="class">Class</option>
+      <option value="phylum">Phylum</option>
+    </param>
+  </inputs>
+  <outputs>
+    <data name="by_taxon" format="csv" label="By-taxon classification"/>
+    <data name="by_specimen" format="csv" label="By-specimen classification"/>
+    <data name="tallies_wide" format="csv" label="Tallies-wide classification"/>
+  </outputs>
+  <configfiles>
+    <configfile name="config">
+SPLIT_MAP="${split_map}"
+LABEL_MAP="${label_map}"
+CLASS_DB="${class_db}"
+WANT_RANK="${want_rank}"
+
+BY_TAXON="${by_taxon}"
+BY_SPECIMEN="${by_specimen}"
+TALLIES_WIDE="${tallies_wide}"
+    </configfile>
+  </configfiles>
+  <!-- The contents of the help tag is parsed as reStructuredText. Please see
+       help-template.rst for examples of commonly-used sections in other Galaxy
+       tools. -->
+  <help>
+
+.. class:: infomark
+
+**What it does**
+
+This tool outputs the classifications made by ``pplacer`` to a tabular format
+appropriate for use with R.
+
+-----
+
+**Example**
+
+The classifications are simply done by containment. Say clade A of the
+reference tree is the smallest such that contains a given placement. The most
+specific classification for that read will be the lowest common ancestor of the
+taxonomic classifications for the leaves of A. If the desired classification is
+more specific than that, then we get a disconnect between the desired and the
+actual classification. For example, if we try to classify at the species level
+and the clade LCA is a genus, then we will get a genus name. If there is
+uncertainty in read placement, then there is uncertainty in classification.
+
+For example, here is a classification list made for one read using the tabular
+output. The columns are as follows: read name, attempted rank for
+classification, actual rank for classification, taxonomic identifier, and
+confidence. You can see that in this example, there is some uncertainty at and
+below species, but only one classification at the genus level::
+
+    GLKT0ZE01CQ2BU                      root          root       1          1
+    GLKT0ZE01CQ2BU                below_root    below_root  131567          1
+    GLKT0ZE01CQ2BU              superkingdom  superkingdom       2          1
+    GLKT0ZE01CQ2BU        below_superkingdom  superkingdom       2          1
+    GLKT0ZE01CQ2BU  below_below_superkingdom  superkingdom       2          1
+    GLKT0ZE01CQ2BU               superphylum  superkingdom       2          1
+    GLKT0ZE01CQ2BU                    phylum        phylum    1239          1
+    GLKT0ZE01CQ2BU                 subphylum        phylum    1239          1
+    GLKT0ZE01CQ2BU                     class         class  186801          1
+    GLKT0ZE01CQ2BU                  subclass         class  186801          1
+    GLKT0ZE01CQ2BU                     order         order  186802          1
+    GLKT0ZE01CQ2BU               below_order         order  186802          1
+    GLKT0ZE01CQ2BU         below_below_order         order  186802          1
+    GLKT0ZE01CQ2BU                  suborder         order  186802          1
+    GLKT0ZE01CQ2BU                    family        family  186804          1
+    GLKT0ZE01CQ2BU              below_family        family  186804          1
+    GLKT0ZE01CQ2BU                     genus         genus    1257          1
+    GLKT0ZE01CQ2BU             species_group         genus    1257          1
+    GLKT0ZE01CQ2BU          species_subgroup         genus    1257          1
+    GLKT0ZE01CQ2BU                   species         genus    1257  0.0732247
+    GLKT0ZE01CQ2BU                   species       species    1261   0.853561
+    GLKT0ZE01CQ2BU                   species       species  341694   0.073214
+    GLKT0ZE01CQ2BU             below_species         genus    1257  0.0732247
+    GLKT0ZE01CQ2BU             below_species       species    1261   0.853561
+    GLKT0ZE01CQ2BU             below_species       species  341694   0.073214
+
+  </help>
+</tool>

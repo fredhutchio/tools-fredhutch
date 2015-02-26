@@ -1,0 +1,50 @@
+<tool id="PHYLO_usearch" name="Analyze sequences" version="1.1.0">
+  <description>with USEARCH</description>
+  <macros>
+    <import>macros.xml</import>
+  </macros>
+  <version_command>/home/matsengrp/local/bin/usearch6_64 --version</version_command>
+  <command interpreter="bash">
+    usearch-wrapper.sh $config
+  </command>
+  <stdio>
+    <expand macro="basic_errors"/>
+  </stdio>
+  <inputs>
+    <param name="input_seqs" type="data" format="fasta" label="Input sequences"/>
+    <param name="class_db" type="data" format="sqlite3" label="Placement database"/>
+  </inputs>
+  <outputs>
+    <data format="csv" name="usearch_hits" label="USEARCH hits"/>
+    <data format="csv" name="usearch_groups" label="USEARCH groups"/>
+  </outputs>
+  <configfiles>
+    <configfile name="config">
+INPUT_SEQS="${input_seqs}"
+CLASS_DB="${class_db}"
+
+USEARCH_HITS="${usearch_hits}"
+USEARCH_GROUPS="${usearch_groups}"
+    </configfile>
+  </configfiles>
+  <!-- The contents of the help tag is parsed as reStructuredText. Please see
+       help-template.rst for examples of commonly-used sections in other Galaxy
+       tools. -->
+  <help>
+
+.. class:: infomark
+
+**What it does**
+
+This tool queries large sequence databases for target sequences and assigns
+those sequences to clusters.
+
+-----
+
+**Citation**
+
+Edgar, R C: **Search and clustering orders of magnitude faster than
+BLAST**. Bioinformatics 2010, **26**:19.
+
+  </help>
+</tool>

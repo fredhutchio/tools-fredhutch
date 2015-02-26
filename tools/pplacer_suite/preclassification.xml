@@ -1,0 +1,50 @@
+<tool id="PHYLO_preclassification" name="Generate database" version="1.2.0">
+  <description>for classification</description>
+  <requirements>
+    <requirement type="package">yapp_env</requirement>
+  </requirements>
+  <macros>
+    <import>macros.xml</import>
+  </macros>
+  <version_command>echo "guppy $(guppy --version)"</version_command>
+  <command interpreter="bash">
+    preclassification-wrapper.sh ${config}
+  </command>
+  <stdio>
+    <expand macro="basic_errors"/>
+  </stdio>
+  <inputs>
+    <param name="dedup_info" type="data" format="csv" label="Deduplication info"/>
+    <param name="refpkg" type="data" format="refpkg" label="Reference package"/>
+    <param name="nbc_seqs" type="data" format="fasta" label="Query alignment" help="The query alignment specified here should be the same as the one passed to pplacer."/>
+    <param name="placed_seqs" type="data" format="jplace" label="Placements"/>
+  </inputs>
+  <outputs>
+    <data name="reduped_seqs" format="jplace" label="Reduped placements"/>
+    <data name="class_db" format="sqlite3" label="Placement database"/>
+  </outputs>
+  <configfiles>
+    <configfile name="config">
+DEDUP_INFO="${dedup_info}"
+REFPKG="${refpkg.extra_files_path}"
+NBC_SEQS="${nbc_seqs}"
+PLACED_SEQS="${placed_seqs}"
+
+REDUPED_SEQS="${reduped_seqs}"
+CLASS_DB="${class_db}"
+    </configfile>
+  </configfiles>
+  <!-- The contents of the help tag is parsed as reStructuredText. Please see
+       help-template.rst for examples of commonly-used sections in other Galaxy
+       tools. -->
+  <help>
+
+.. class:: infomark
+
+**What it does**
+
+This tool outputs the classifications made by ``pplacer`` to a database for use
+in taxonomic classification.
+
+  </help>
+</tool>

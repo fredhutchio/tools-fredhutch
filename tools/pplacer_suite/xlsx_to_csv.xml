@@ -1,0 +1,21 @@
+<tool id="CONVERTER_xlsx_to_csv" name="Convert xlsx to csv" version="1.0.0">
+  <requirements>
+    <requirement type="package">yapp_env</requirement>
+  </requirements>
+  <command>in2csv -f xlsx $input > $output</command>
+  <inputs>
+    <param name="input" type="data" format="xlsx" label="Excel spreadsheet"/>
+  </inputs>
+  <outputs>
+    <data name="output" format="csv"/>
+  </outputs>
+  <help>
+
+.. class:: infomark
+
+**What it does**
+
+This tool converts a spreadsheet in Microsoft Excel 2007 (.xlsx) format to CSV.
+
+  </help>
+</tool>

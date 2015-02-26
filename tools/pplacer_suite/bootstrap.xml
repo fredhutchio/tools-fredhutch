@@ -1,0 +1,67 @@
+<tool id="PHYLO_bootstrap" name="Prepare data" version="1.1.0">
+  <description>for analysis</description>
+  <requirements>
+    <requirement type="package">yapp_env</requirement>
+  </requirements>
+  <macros>
+    <import>macros.xml</import>
+  </macros>
+  <version_command>echo "bootstrap script 1.1.0"</version_command>
+  <command interpreter="bash">
+    bootstrap-wrapper.sh $config
+  </command>
+  <stdio>
+    <expand macro="basic_errors"/>
+  </stdio>
+  <inputs>
+    <param name="plate_id" type="integer" value="1" label="Plate number"/>
+    <conditional name="run_type">
+      <param name="run_type_select" type="select" label="Run type">
+        <option value="junior">Junior</option>
+        <option value="senior">Senior</option>
+      </param>
+      <when value="junior"></when>
+      <when value="senior">
+        <param name="zone_id" type="integer" value="1" label="Zone number"/>
+      </when>
+    </conditional>
+    <param name="sample_info" type="data" format="csv" label="Sample information"/>
+  </inputs>
+  <outputs>
+    <data format="csv" name="barcodes" label="Specimen-to-barcode map"/>
+    <data format="csv" name="labels" label="Specimen-to-label map"/>
+    <data format="csv" name="metadata" label="Metadata template"/>
+  </outputs>
+  <configfiles>
+    <configfile name="config">
+PLATE_ID="${plate_id}"
+#if $run_type.run_type_select == "senior"
+JUNIOR=""
+ZONE_ID="${run_type.zone_id}"
+#else
+JUNIOR="--junior"
+ZONE_ID="1"
+#end if
+SAMPLE_INFO="${sample_info}"
+
+BARCODES="${barcodes}"
+LABELS="${labels}"
+METADATA="${metadata}"
+    </configfile>
+  </configfiles>
+  <!-- The contents of the help tag is parsed as reStructuredText. Please see
+       help-template.rst for examples of commonly-used sections in other Galaxy
+       tools. -->
+  <help>
+
+.. class:: infomark
+
+**What it does**
+
+This tool parses sample information and creates a mapping of samples to
+barcodes. The sample information file must contain the columns ``sampleid``,
+``barcode``, and ``reverse``, and can optionally contain a ``zone`` column
+also.
+
+  </help>
+</tool>

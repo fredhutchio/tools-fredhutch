@@ -1,5 +1,8 @@
 <tool id="CONVERTER_xlsx_to_csv" name="Convert xlsx to csv" version="1.0.0">
-  <command>/home/matsengrp/local/bin/in2csv -f xlsx $input > $output</command>
+  <requirements>
+    <requirement type="package">yapp_env</requirement>
+  </requirements>
+  <command>in2csv -f xlsx $input > $output</command>
   <inputs>
     <param name="input" type="data" format="xlsx" label="Excel spreadsheet"/>
   </inputs>

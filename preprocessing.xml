@@ -1,11 +1,11 @@
 <tool id="PHYLO_preprocessing" name="Preprocess sequences" version="2.0.0">
   <description>in preparation for phylogenetic placement</description>
+  <requirements>
+    <requirement type="package">yapp_env</requirement>
+  </requirements>
   <macros>
     <import>macros.xml</import>
   </macros>
-  <requirements>
-    <requirement type="package" version="52abf36eb81c5e05383278735a150b0cc938269d">yapp-env</requirement>
-  </requirements>
   <version_command>echo "guppy $(guppy --version)"</version_command>
   <command interpreter="bash">
     preprocessing-wrapper.sh ${config}

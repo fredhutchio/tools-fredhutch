@@ -1,7 +1,7 @@
 <tool id="CSV_csv2html" name="Render CSV file" version="1.0.0">
   <description>as an HTML table</description>
-  <command>
-    /home/matsengrp/local/bin/csv2html &lt; $input &gt; $output
+  <command interpreter="python">
+    csv2html.py &lt; $input &gt; $output
   </command>
   <inputs>
     <param name="input" type="data" format="csv" label="CSV file"/>

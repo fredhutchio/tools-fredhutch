@@ -1,5 +1,8 @@
 <tool id="PHYLO_bootstrap" name="Prepare data" version="1.1.0">
   <description>for analysis</description>
+  <requirements>
+    <requirement type="package">yapp_env</requirement>
+  </requirements>
   <macros>
     <import>macros.xml</import>
   </macros>

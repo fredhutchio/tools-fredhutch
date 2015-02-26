@@ -1,9 +1,12 @@
 <tool id="PHYLO_preclassification" name="Generate database" version="1.2.0">
   <description>for classification</description>
+  <requirements>
+    <requirement type="package">yapp_env</requirement>
+  </requirements>
   <macros>
     <import>macros.xml</import>
   </macros>
-  <version_command>echo "guppy $(/home/matsengrp/local/bin/guppy --version)"</version_command>
+  <version_command>echo "guppy $(guppy --version)"</version_command>
   <command interpreter="bash">
     preclassification-wrapper.sh ${config}
   </command>

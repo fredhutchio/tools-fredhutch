@@ -30,19 +30,3 @@ if [[ ${REVERSE_COMPLEMENT} == "TRUE" ]]; then
 fi
 
 mv filtered.fasta ${FILTERED_SEQS}
-
-# TODO: separate tool for concatenating seq data (and reverse complementing them?)
-#cat [12]*Reads.fasta | seqmagick convert --input-format fasta - combined.fasta --reverse-complement
-#cat [12]*.map.csv > combined.map.csv
-
-sequencing_quality_report.py ${PLATE_JSON} -t "Sequencing quality report" -o ${SQR_DIR}
-
-cat <<EOF > ${SQR}
-<!DOCTYPE HTML>
-<html lang="en-US">
-  <head/>
-  <body>
-    <a href="index.html">Sequencing quality report</a>
-  </body>
-</html>
-EOF

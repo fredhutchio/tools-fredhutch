@@ -1,0 +1,32 @@
+<tool id="descriptiveStatistics" name="Descriptive Statistics" version="0.0.16">
+  <description>Taxonomic and Sample Descriptive Statistics</description>
+  <command interpreter="/home/matsenweb/R/bin/bin/Rscript --vanilla">descriptiveStatistics.R
+       #if str($CommunityFile).strip() != "":
+          --CommunityFile="$CommunityFile"
+       #end if
+       #if str($Attributes).strip() != "":
+          --Attributes="$Attributes"
+       #end if
+       #if str($OutputFile).strip() != "":
+          --OutputFile="$OutputFile"
+       #end if
+
+2&gt;&amp;1</command>
+  <inputs>
+    <param optional="false" name="CommunityFile" format="rda" type="data" help="File created by the 'community' function." label="[required] Community File">
+      <validator type="empty_field" message="This field is required."/>
+    </param>
+    <param optional="true" name="Attributes" type="text" help="Comma-separated names of SamplesFile columns on which&#10;descriptive statistics are to be calculated. Example:&#10;Nugent_2_group" size="60" label="Attributes">
+      <validator type="empty_field" message="This field is required."/>
+    </param>
+  </inputs>
+  <outputs>
+    <data format="txt" name="OutputFile" label="descriptiveStatistics.txt"/>
+  </outputs>
+  <help>
+**Description**
+
+Generate descriptive statistics about taxa and samples present in
+a CommunityFile.
+</help>
+</tool>

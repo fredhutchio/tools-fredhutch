@@ -1,0 +1,66 @@
+<tool id="community" name="Community" version="0.0.16">
+  <description>'Community' Data Input</description>
+  <command interpreter="/home/matsenweb/R/bin/bin/Rscript --vanilla">community.R
+       #if str($CountsFile).strip() != "":
+          --CountsFile="$CountsFile"
+       #end if
+       #if str($SamplesFile).strip() != "":
+          --SamplesFile="$SamplesFile"
+       #end if
+       #if str($K).strip() != "":
+          --K="$K"
+       #end if
+       #if str($A).strip() != "":
+          --A="$A"
+       #end if
+       #if str($Transform).strip() != "":
+          --Transform="$Transform"
+       #end if
+       #if str($SampleName).strip() != "":
+          --SampleName="$SampleName"
+       #end if
+       #if str($ColumnClasses).strip() != "":
+          --ColumnClasses="$ColumnClasses"
+       #end if
+       #if str($OutputFile).strip() != "":
+          --OutputFile="$OutputFile"
+       #end if
+
+2&gt;&amp;1</command>
+  <inputs>
+    <param optional="false" name="CountsFile" type="data" help="Name of a CSV file containing OTU samples." label="[required] Counts File">
+      <validator type="empty_field" message="This field is required."/>
+    </param>
+    <param optional="false" name="SamplesFile" type="data" help="Name of a CSV file containing sample data." label="[required] Samples File">
+      <validator type="empty_field" message="This field is required."/>
+    </param>
+    <param optional="true" name="K" type="float" value="0" help="The parameters 'K' and 'A' together define a 'K over A'&#10;filter. The filter can be used to include only some taxa. The&#10;idea is that a taxonomic entity is only included if at least&#10;'A' reads are present in at least 'K' samples. The default is&#10;A = K = 0, i.e., include all taxa. Specify 'K' in the box&#10;above." label="K">
+      <validator type="empty_field" message="This field is required."/>
+    </param>
+    <param optional="true" name="A" type="float" value="0" help="Include only taxa with at least K samples greater than A, as&#10;described for the parameter K." label="A">
+      <validator type="empty_field" message="This field is required."/>
+    </param>
+    <param optional="true" name="Transform" type="select" help="(Optional) A transformation applied to all count data, after&#10;the 'K Over A' filter has been run.  Possible values include&#10;&quot;log&quot; (actually, log(x + .5) to avoid logarithms of zero&#10;counts) and &quot;asinh&quot; (inverse hyperboloic sine, a log-like&#10;transformation with better behavior near zero)." label="Transform" force_select="FALSE">
+      <validator type="empty_field" message="This field is required."/>
+      <option value="none">none</option>
+      <option value="log">log</option>
+      <option value="asinh">asinh</option>
+    </param>
+    <param optional="true" name="SampleName" type="text" help="(Optional) Samples File column name containing names by&#10;which samples are identified in all subsequent calculations.&#10;If two rows have the same Sample Name, then corresponding&#10;counts in the Counts File are added together." size="60" label="Sample Name">
+      <validator type="empty_field" message="This field is required."/>
+    </param>
+    <param optional="true" name="ColumnClasses" type="text" help="(Optional) Comma-separated names specifying how each&#10;column is to be represented. There must be as many names, and&#10;in the same order, as there are columns in the file. Typical&#10;values include: logical, integer, numeric, character, factor,&#10;Date. Use 'factor' to indicate a variable with discrete&#10;levels, e.g., sex (with levels Male, Female) tissue type&#10;(with levels Tumor, Normal), etc. When 'Date' is used, dates&#10;should be formatted consistently as year-month-day or&#10;year/month/day, e.g., 2014-03-26; poorly formed dates will be&#10;converted to 'NA' values." size="60" label="Column Classes">
+      <validator type="empty_field" message="This field is required."/>
+    </param>
+  </inputs>
+  <outputs>
+    <data format="rda" name="OutputFile" label="community.rda"/>
+  </outputs>
+  <help>
+**Description**
+
+Input a CSV file of integer-valued counts of each taxon (row) in
+each sample (column), and a CSV file of annotations on each
+sample. The result is used in down-stream analysis.
+</help>
+</tool>

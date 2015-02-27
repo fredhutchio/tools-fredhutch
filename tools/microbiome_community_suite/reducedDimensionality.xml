@@ -1,0 +1,38 @@
+<tool id="reducedDimensionality" name="Reduced Dimensionality" version="0.0.16">
+  <description>Taxnomic Dimensionality Reduction (Ordination) Plot</description>
+  <command interpreter="/home/matsenweb/R/bin/bin/Rscript --vanilla">reducedDimensionality.R
+       #if str($CommunityFile).strip() != "":
+          --CommunityFile="$CommunityFile"
+       #end if
+       #if str($Attributes).strip() != "":
+          --Attributes="$Attributes"
+       #end if
+       #if str($OrdinationAlgorithm).strip() != "":
+          --OrdinationAlgorithm="$OrdinationAlgorithm"
+       #end if
+       #if str($OutputFile).strip() != "":
+          --OutputFile="$OutputFile"
+       #end if
+
+2&gt;&amp;1</command>
+  <inputs>
+    <param optional="false" name="CommunityFile" format="rda" type="data" help="File created by the 'community' function." label="[required] Community File">
+      <validator type="empty_field" message="This field is required."/>
+    </param>
+    <param optional="true" name="Attributes" type="text" help="Comma-separated names of SamplesFile columns on which&#10;ribbons are to be plotted. Samples are ordered by the first&#10;element of Attributes; Attributes must identify more than 1&#10;SampleFile column. Example: Nugent_3_group, Amsel,&#10;Nugent_Lactobacillus, pH, Clue" size="60" label="Attributes">
+      <validator type="empty_field" message="This field is required."/>
+    </param>
+    <param optional="true" name="OrdinationAlgorithm" type="select" value="MDS" help="Algorithm to use for oridination &quot;PCoA&quot; (Principle&#10;Coordinates Analysis), &quot;NMDS&quot; (Non-Metric Multidimensional&#10;Scaling), &quot;CA&quot; (Correspondence Analysis), &quot;DPCoA&quot; (Double&#10;Principle Components Analysis)." label="Ordination Algorithm" force_select="FALSE">
+      <validator type="empty_field" message="This field is required."/>
+      <option value="MDS">MDS</option>
+    </param>
+  </inputs>
+  <outputs>
+    <data format="pdf" name="OutputFile" label="reducedDimensionality.pdf"/>
+  </outputs>
+  <help>
+**Description**
+
+Reduce dimensionality of taxonomic abundance.
+</help>
+</tool>

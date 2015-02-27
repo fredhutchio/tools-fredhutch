@@ -1,0 +1,31 @@
+<tool id="presenceAbsence" name="Presence Absence" version="0.0.16">
+  <description>Taxonomic Presence / Absence Summary and Chi-squared Test</description>
+  <command interpreter="/home/matsenweb/R/bin/bin/Rscript --vanilla">presenceAbsence.R
+       #if str($CommunityFile).strip() != "":
+          --CommunityFile="$CommunityFile"
+       #end if
+       #if str($Attribute).strip() != "":
+          --Attribute="$Attribute"
+       #end if
+       #if str($OutputFile).strip() != "":
+          --OutputFile="$OutputFile"
+       #end if
+
+2&gt;&amp;1</command>
+  <inputs>
+    <param optional="false" name="CommunityFile" format="rda" type="data" help="File created by the 'community' function" label="[required] Community File">
+      <validator type="empty_field" message="This field is required."/>
+    </param>
+    <param optional="true" name="Attribute" type="text" help="Name of a sample attribute to summarize presence / absence&#10;data. Example: Nugent_2_group" size="60" label="Attribute">
+      <validator type="empty_field" message="This field is required."/>
+    </param>
+  </inputs>
+  <outputs>
+    <data format="csv" name="OutputFile" label="presenceAbsence.csv"/>
+  </outputs>
+  <help>
+**Description**
+
+Summarize samples with each taxon present, grouped by factor
+</help>
+</tool>

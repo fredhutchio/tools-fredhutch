@@ -1,0 +1,27 @@
+<tool id="diversityStatistics" name="Diversity Statistics" version="0.0.16">
+  <description>Taxonomic Diversity Statistics</description>
+  <command interpreter="/home/matsenweb/R/bin/bin/Rscript --vanilla">diversityStatistics.R
+       #if str($CommunityFile).strip() != "":
+          --CommunityFile="$CommunityFile"
+       #end if
+       #if str($OutputFile).strip() != "":
+          --OutputFile="$OutputFile"
+       #end if
+
+2&gt;&amp;1</command>
+  <inputs>
+    <param optional="false" name="CommunityFile" format="rda" type="data" help="File created by the 'community' function." label="[required] Community File">
+      <validator type="empty_field" message="This field is required."/>
+    </param>
+  </inputs>
+  <outputs>
+    <data format="csv" name="OutputFile" label="diversityStatistics.csv"/>
+  </outputs>
+  <help>
+**Description**
+
+Compute per-sample Shannon, Simpson, Chao1, and ACE summary
+statistics of taxonomic diversity. Also report per-sample number
+of taxa with non-zero read counts, and total number of reads.
+</help>
+</tool>

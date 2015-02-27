@@ -1,0 +1,40 @@
+<tool id="ribbonPlot" name="Ribbon Plot" version="0.0.16">
+  <description>Attribute Ribbon Plot of Clustered Samples</description>
+  <command interpreter="/home/matsenweb/R/bin/bin/Rscript --vanilla">ribbonPlot.R
+       #if str($CommunityFile).strip() != "":
+          --CommunityFile="$CommunityFile"
+       #end if
+       #if str($Attributes).strip() != "":
+          --Attributes="$Attributes"
+       #end if
+       #if str($ClusteringAlgorithm).strip() != "":
+          --ClusteringAlgorithm="$ClusteringAlgorithm"
+       #end if
+       #if str($OutputFile).strip() != "":
+          --OutputFile="$OutputFile"
+       #end if
+
+2&gt;&amp;1</command>
+  <inputs>
+    <param optional="false" name="CommunityFile" format="rda" type="data" help="File created by the 'community' function." label="[required] Community File">
+      <validator type="empty_field" message="This field is required."/>
+    </param>
+    <param optional="true" name="Attributes" type="text" help="Comma-separated names of SamplesFile columns on which&#10;ribbons are to be plotted. Samples are ordered by the first&#10;element of Attributes; Attributes must identify more than 1&#10;SampleFile column. Example: Nugent_3_group, Amsel,&#10;Nugent_Lactobacillus, pH, Clue" size="60" label="Attributes">
+      <validator type="empty_field" message="This field is required."/>
+    </param>
+    <param optional="true" name="ClusteringAlgorithm" type="select" help="Algorithm to use for clustering samples, one of&#10;&quot;hclust&quot; or 'DirichletMultinomial&quot; (from the&#10;DirichletMultinomial package)." label="Clustering Algorithm" force_select="FALSE">
+      <validator type="empty_field" message="This field is required."/>
+      <option value="hclust">hclust</option>
+      <option value="DirichletMultinomial">DirichletMultinomial</option>
+    </param>
+  </inputs>
+  <outputs>
+    <data format="svg" name="OutputFile" label="ribbonPlot.svg"/>
+  </outputs>
+  <help>
+**Description**
+
+Attributes of samples as heat maps, with samples clustered by one
+of several algorithms
+</help>
+</tool>

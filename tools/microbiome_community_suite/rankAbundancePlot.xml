@@ -1,0 +1,53 @@
+<tool id="rankAbundancePlot" name="Rank Abundance Plot" version="0.0.16">
+  <description>Rank Abundance of Taxonomic Counts</description>
+  <command interpreter="/home/matsenweb/R/bin/bin/Rscript --vanilla">rankAbundancePlot.R
+       #if str($CommunityFile).strip() != "":
+          --CommunityFile="$CommunityFile"
+       #end if
+       #if str($TaxonQuantile).strip() != "":
+          --TaxonQuantile="$TaxonQuantile"
+       #end if
+       #if str($Transform).strip() != "":
+          --Transform="$Transform"
+       #end if
+       #if str($RelativeAbundance).strip() != "":
+          --RelativeAbundance="$RelativeAbundance"
+       #end if
+       #if str($Attributes).strip() != "":
+          --Attributes="$Attributes"
+       #end if
+       #if str($OutputFile).strip() != "":
+          --OutputFile="$OutputFile"
+       #end if
+
+2&gt;&amp;1</command>
+  <inputs>
+    <param optional="false" name="CommunityFile" format="rda" type="data" help="File created by the 'community' function." label="[required] Community File">
+      <validator type="empty_field" message="This field is required."/>
+    </param>
+    <param optional="true" name="TaxonQuantile" type="float" value="0" help="(Optional, default 0) Numeric value between 0 and 1,&#10;limiting only taxa more frequent than the specified quantile." label="Taxon Quantile">
+      <validator type="empty_field" message="This field is required."/>
+    </param>
+    <param optional="true" name="Transform" type="select" help="(Optional; default 'none') Character string defining how&#10;count data are to be transformed prior to calculation of&#10;co-occurrence. Possible values are 'none', 'log1' (log of 1 +&#10;the observed count, to allow for zeros in the data), 'asinh'&#10;(a log-like transformation that handles zeros more&#10;naturally), 'sqrt' (square root, a transformation commonly&#10;used for count data)." label="Transform" force_select="FALSE">
+      <validator type="empty_field" message="This field is required."/>
+      <option value="none">none</option>
+      <option value="log1">log1</option>
+      <option value="asinh">asinh</option>
+      <option value="sqrt">sqrt</option>
+    </param>
+    <param optional="true" name="RelativeAbundance" type="boolean" value="FALSE" help="(Optional, default FALSE) When TRUE, scale&#10;transformed taxon abundances of each sample to sum to 1." checked="false" label="Relative Abundance">
+      <validator type="empty_field" message="This field is required."/>
+    </param>
+    <param optional="true" name="Attributes" type="text" help="Provide ribbon(s) identifying samples according to&#10;specified attributes." size="60" label="Attributes">
+      <validator type="empty_field" message="This field is required."/>
+    </param>
+  </inputs>
+  <outputs>
+    <data format="pdf" name="OutputFile" label="rankAbundance.pdf"/>
+  </outputs>
+  <help>
+**Description**
+
+Rank abundance plots
+</help>
+</tool>

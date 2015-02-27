@@ -1,0 +1,26 @@
+<tool id="getAttributeList" name="Get Attribute List" version="0.0.16">
+  <description>Get available attributes from a community file.</description>
+  <command interpreter="/home/matsenweb/R/bin/bin/Rscript --vanilla">getAttributeList.R
+       #if str($CommunityFile).strip() != "":
+          --CommunityFile="$CommunityFile"
+       #end if
+       #if str($OutputFile).strip() != "":
+          --OutputFile="$OutputFile"
+       #end if
+
+2&gt;&amp;1</command>
+  <inputs>
+    <param optional="false" name="CommunityFile" format="rda" type="data" help="created by the 'community' function." label="[required] Community File">
+      <validator type="empty_field" message="This field is required."/>
+    </param>
+  </inputs>
+  <outputs>
+    <data format="txt" name="OutputFile" label="attributes.txt"/>
+  </outputs>
+  <help>
+**Description**
+
+Display available attributes from a community file, for use with
+other Microbiome Workflow tools.
+</help>
+</tool>

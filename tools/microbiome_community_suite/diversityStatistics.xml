@@ -1,6 +1,6 @@
 <tool id="diversityStatistics" name="Diversity Statistics" version="0.0.16">
   <description>Taxonomic Diversity Statistics</description>
-  <command interpreter="/home/matsenweb/R/bin/bin/Rscript --vanilla">diversityStatistics.R
+  <command interpreter="/usr/bin/Rscript --vanilla">diversityStatistics.R
        #if str($CommunityFile).strip() != "":
           --CommunityFile="$CommunityFile"
        #end if

@@ -1,6 +1,6 @@
 <tool id="reducedDimensionality" name="Reduced Dimensionality" version="0.0.16">
   <description>Taxnomic Dimensionality Reduction (Ordination) Plot</description>
-  <command interpreter="/home/matsenweb/R/bin/bin/Rscript --vanilla">reducedDimensionality.R
+  <command interpreter="/usr/bin/Rscript --vanilla">reducedDimensionality.R
        #if str($CommunityFile).strip() != "":
           --CommunityFile="$CommunityFile"
        #end if

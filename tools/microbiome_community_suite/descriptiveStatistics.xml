@@ -1,6 +1,6 @@
 <tool id="descriptiveStatistics" name="Descriptive Statistics" version="0.0.16">
   <description>Taxonomic and Sample Descriptive Statistics</description>
-  <command interpreter="/home/matsenweb/R/bin/bin/Rscript --vanilla">descriptiveStatistics.R
+  <command interpreter="/usr/bin/Rscript --vanilla">descriptiveStatistics.R
        #if str($CommunityFile).strip() != "":
           --CommunityFile="$CommunityFile"
        #end if

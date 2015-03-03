@@ -1,6 +1,6 @@
 <tool id="rankAbundancePlot" name="Rank Abundance Plot" version="0.0.16">
   <description>Rank Abundance of Taxonomic Counts</description>
-  <command interpreter="/home/matsenweb/R/bin/bin/Rscript --vanilla">rankAbundancePlot.R
+  <command interpreter="/usr/bin/Rscript --vanilla">rankAbundancePlot.R
        #if str($CommunityFile).strip() != "":
           --CommunityFile="$CommunityFile"
        #end if

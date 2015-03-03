@@ -1,6 +1,6 @@
 <tool id="ribbonPlot" name="Ribbon Plot" version="0.0.16">
   <description>Attribute Ribbon Plot of Clustered Samples</description>
-  <command interpreter="/home/matsenweb/R/bin/bin/Rscript --vanilla">ribbonPlot.R
+  <command interpreter="/usr/bin/Rscript --vanilla">ribbonPlot.R
        #if str($CommunityFile).strip() != "":
           --CommunityFile="$CommunityFile"
        #end if

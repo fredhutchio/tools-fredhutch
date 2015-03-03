@@ -1,6 +1,6 @@
 <tool id="presenceAbsence" name="Presence Absence" version="0.0.16">
   <description>Taxonomic Presence / Absence Summary and Chi-squared Test</description>
-  <command interpreter="/home/matsenweb/R/bin/bin/Rscript --vanilla">presenceAbsence.R
+  <command interpreter="/usr/bin/Rscript --vanilla">presenceAbsence.R
        #if str($CommunityFile).strip() != "":
           --CommunityFile="$CommunityFile"
        #end if

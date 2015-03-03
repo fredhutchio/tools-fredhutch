@@ -21,7 +21,7 @@ option_list$OutputFile <- make_option('--OutputFile', type='character')
 
 opt <- parse_args(OptionParser(option_list=option_list))
 
-suppressPackageStartupMessages(library(RSclient))
+suppressPackageStartupMessages(library(microbiomePkg))
 
 ## function body not needed here, it is in package
 
@@ -40,15 +40,8 @@ wrappedFunction <- function(f)
 }
 
 
-c <- RS.connect(host='localhost', port=6311)
-RS.eval(c, options('useFancyQuotes' = FALSE))
-RS.eval(c, suppressPackageStartupMessages(library(RGalaxy)))
-RS.assign(c, 'params', params)
-RS.assign(c, 'wrappedFunction', wrappedFunction)
-RS.eval(c, setClass('GalaxyRemoteError', contains='character'))
-res <- RS.eval(c, wrappedFunction(ribbonPlot))
-RS.close(c)
-if(is(res, 'GalaxyRemoteError'))RGalaxy::gstop(res)
+suppressPackageStartupMessages(library(RGalaxy))
+do.call(ribbonPlot, params)
 
 ## end warning handler
 }, warning = function(w) {

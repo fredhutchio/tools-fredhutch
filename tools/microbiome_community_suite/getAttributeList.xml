@@ -1,6 +1,6 @@
 <tool id="getAttributeList" name="Get Attribute List" version="0.0.16">
   <description>Get available attributes from a community file.</description>
-  <command interpreter="/home/matsenweb/R/bin/bin/Rscript --vanilla">getAttributeList.R
+  <command interpreter="/usr/bin/Rscript --vanilla">getAttributeList.R
        #if str($CommunityFile).strip() != "":
           --CommunityFile="$CommunityFile"
        #end if

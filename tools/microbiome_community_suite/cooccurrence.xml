@@ -1,6 +1,6 @@
 <tool id="cooccurrence" name="Cooccurrence" version="0.0.16">
   <description>Taxonomic Co-occurrence Heatmap</description>
-  <command interpreter="/home/matsenweb/R/bin/bin/Rscript --vanilla">cooccurrence.R
+  <command interpreter="/usr/bin/Rscript --vanilla">cooccurrence.R
        #if str($CommunityFile).strip() != "":
           --CommunityFile="$CommunityFile"
        #end if

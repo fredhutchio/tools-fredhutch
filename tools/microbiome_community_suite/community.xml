@@ -1,6 +1,6 @@
 <tool id="community" name="Community" version="0.0.16">
   <description>'Community' Data Input</description>
-  <command interpreter="/home/matsenweb/R/bin/bin/Rscript --vanilla">community.R
+  <command interpreter="/usr/bin/Rscript --vanilla">community.R
        #if str($CountsFile).strip() != "":
           --CountsFile="$CountsFile"
        #end if
@@ -40,7 +40,7 @@
     <param optional="true" name="A" type="float" value="0" help="Include only taxa with at least K samples greater than A, as&#10;described for the parameter K." label="A">
       <validator type="empty_field" message="This field is required."/>
     </param>
-    <param optional="true" name="Transform" type="select" help="(Optional) A transformation applied to all count data, after&#10;the 'K Over A' filter has been run.  Possible values include&#10;&quot;log&quot; (actually, log(x + .5) to avoid logarithms of zero&#10;counts) and &quot;asinh&quot; (inverse hyperboloic sine, a log-like&#10;transformation with better behavior near zero)." label="Transform" force_select="FALSE">
+    <param optional="true" name="Transform" type="select" help="(Optional) A transformation applied to all count data, after&#10;the 'K Over A' filter has been run. Possible values include&#10;&quot;log&quot; (actually, log(x + .5) to avoid logarithms of zero&#10;counts) and &quot;asinh&quot; (inverse hyperboloic sine, a log-like&#10;transformation with better behavior near zero)." label="Transform" force_select="FALSE">
       <validator type="empty_field" message="This field is required."/>
       <option value="none">none</option>
       <option value="log">log</option>

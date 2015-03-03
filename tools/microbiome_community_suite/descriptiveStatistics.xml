@@ -1,6 +1,10 @@
 <tool id="descriptiveStatistics" name="Descriptive Statistics" version="0.0.16">
   <description>Taxonomic and Sample Descriptive Statistics</description>
-  <command interpreter="/usr/bin/Rscript --vanilla">descriptiveStatistics.R
+  <requirements>
+    <requirement type="package" version="3.1.2">R</requirement>
+    <requirement type="package" version="2014-05-02">microbiome_community</requirement>
+  </requirements>
+  <command interpreter="Rscript --vanilla">descriptiveStatistics.R
        #if str($CommunityFile).strip() != "":
           --CommunityFile="$CommunityFile"
        #end if

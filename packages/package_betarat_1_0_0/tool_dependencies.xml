@@ -51,6 +51,7 @@
           <environment_variable action="prepend_to" name="PYTHONPATH">$ENV[CYTHON_PATH]/lib/python</environment_variable>
           <environment_variable action="prepend_to" name="PATH">$ENV[CYTHON_PATH]/bin</environment_variable>
           <environment_variable action="prepend_to" name="PYTHONPATH">$ENV[PYTHONPATH_MPMATH]</environment_variable>
+          <environment_variable action="prepend_to" name="LD_LIBRARY_PATH">$ENV[LIBGMP_ROOT_DIR]/lib</environment_variable>
           <environment_variable action="set_to" name="PYTHONPATH_BETARAT">$INSTALL_DIR/lib/python</environment_variable>
           <environment_variable action="set_to" name="PATH_BETARAT">$INSTALL_DIR/bin</environment_variable>
         </action>

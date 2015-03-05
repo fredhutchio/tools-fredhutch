@@ -1,9 +1,17 @@
 <?xml version='1.0' encoding='utf-8'?>
 <tool_dependency>
+  <package name="numpy" version="1.9">
+    <repository name="package_numpy_1_9" owner="iuc" prior_installation_required="True"/>
+  </package>
   <package name="fisher" version="0.1.4">
     <install version="1.0">
       <actions>
         <action type="download_by_url">https://pypi.python.org/packages/source/f/fisher/fisher-0.1.4.tar.gz#md5=bfc763b7333a1f428e4c447dd8a85968</action>
+        <action type="set_environment_for_install">
+          <repository name="package_numpy_1_9" owner="iuc">
+            <package name="numpy" version="1.9" />
+          </repository>
+        </action>
         <action type="make_directory">$INSTALL_DIR/lib/python</action>
         <action type="shell_command">
           export PYTHONPATH=$PYTHONPATH:$INSTALL_DIR/lib/python &amp;&amp;

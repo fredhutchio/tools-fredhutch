@@ -38,12 +38,6 @@
         <action type="set_environment">
           <environment_variable action="prepend_to" name="PYTHONPATH">$INSTALL_DIR/lib/python</environment_variable>
           <environment_variable action="prepend_to" name="PATH">$INSTALL_DIR/bin</environment_variable>
-          <environment_variable action="prepend_to" name="PYTHONPATH">$ENV[PYTHONPATH_BIOPYTHON]</environment_variable>
-          <environment_variable action="prepend_to" name="PYTHONPATH">$ENV[PYTHONPATH_FISHER]</environment_variable>
-          <environment_variable action="prepend_to" name="PYTHONPATH">$ENV[PYTHONPATH_BETARAT]</environment_variable>
-          <environment_variable action="prepend_to" name="PATH">$ENV[PATH_BETARAT]</environment_variable>
-          <environment_variable action="prepend_to" name="PYTHONPATH">$ENV[PYTHONPATH_ALNCLST]</environment_variable>
-          <environment_variable action="prepend_to" name="PATH">$ENV[PATH_ALNCLST]</environment_variable>
           <environment_variable action="set_to" name="PYTHONPATH_HYPERFREQ">$INSTALL_DIR/lib/python</environment_variable>
           <environment_variable action="set_to" name="PATH_HYPERFREQ">$INSTALL_DIR/bin</environment_variable>
         </action>

@@ -1,6 +1,10 @@
 <tool id="CFAR_hyperfreq" name="Analyze sequences for hypermutation" version="1.0.0">
   <description>using Bayesian analysis with hyperfreq</description>
   <requirements>
+    <requirement type="package" version="1.65">biopython</requirement>
+    <requirement type="package" version="0.1.4">fisher</requirement>
+    <requirement type="package" version="1.0.0">betarat</requirement>
+    <requirement type="package" version="0.1.2">alnclst</requirement>
     <requirement type="package" version="1.2.0">hyperfreq</requirement>
   </requirements>
   <macros>

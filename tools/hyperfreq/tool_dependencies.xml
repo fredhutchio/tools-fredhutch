@@ -1,6 +1,18 @@
 <?xml version='1.0' encoding='utf-8'?>
 <tool_dependency>
+  <package name="biopython" version="1.65">
+    <repository name="package_biopython_1_65" owner="biopython"/>
+  </package>
+  <package name="fisher" version="0.1.4">
+    <repository name="package_fisher_0_1_4" owner="bcclaywell"/>
+  </package>
+  <package name="betarat" version="1.0.0">
+    <repository name="package_betarat_1_0_0" owner="bcclaywell"/>
+  </package>
+  <package name="alnclst" version="0.1.2">
+    <repository name="package_alnclst_0_1_2" owner="bcclaywell"/>
+  </package>
   <package name="hyperfreq" version="1.2.0">
-    <repository name="package_hyperfreq_1_2_0" owner="bcclaywell" />
+    <repository name="package_hyperfreq_1_2_0" owner="bcclaywell"/>
   </package>
 </tool_dependency>

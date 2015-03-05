@@ -8,11 +8,11 @@
           make check
         </action>
         <action type="set_environment">
-          <environment_variable name="LIBRARY_PATH" action="prepend_to">$INSTALL_DIR/lib</environment_variable>
-          <environment_variable name="LD_LIBRARY_PATH" action="prepend_to">$INSTALL_DIR/lib</environment_variable>
-          <environment_variable name="LIBGMP_ROOT_DIR" action="set_to">$INSTALL_DIR</environment_variable>
-          <environment_variable name="C_INCLUDE_PATH" action="prepend_to">$INSTALL_DIR/include</environment_variable>
-          <environment_variable name="CPLUS_INCLUDE_PATH" action="prepend_to">$INSTALL_DIR/include</environment_variable>
+          <environment_variable action="prepend_to" name="LIBRARY_PATH">$INSTALL_DIR/lib</environment_variable>
+          <environment_variable action="prepend_to" name="LD_LIBRARY_PATH">$INSTALL_DIR/lib</environment_variable>
+          <environment_variable action="prepend_to" name="C_INCLUDE_PATH">$INSTALL_DIR/include</environment_variable>
+          <environment_variable action="prepend_to" name="CPLUS_INCLUDE_PATH">$INSTALL_DIR/include</environment_variable>
+          <environment_variable action="set_to" name="LIBGMP_ROOT_DIR">$INSTALL_DIR</environment_variable>
         </action>
       </actions>
     </install>

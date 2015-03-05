@@ -5,7 +5,7 @@
       <actions>
         <action type="download_by_url">https://pypi.python.org/packages/source/f/fisher/fisher-0.1.4.tar.gz#md5=bfc763b7333a1f428e4c447dd8a85968</action>
         <action type="make_directory">$INSTALL_DIR/lib/python</action>
-        <action type="template_command">
+        <action type="shell_command">
           export PYTHONPATH=$PYTHONPATH:$INSTALL_DIR/lib/python &amp;&amp;
           python setup.py install --install-lib $INSTALL_DIR/lib/python
         </action>

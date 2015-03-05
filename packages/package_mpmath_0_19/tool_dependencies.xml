@@ -5,7 +5,7 @@
       <actions>
         <action type="download_by_url">https://pypi.python.org/packages/source/m/mpmath/mpmath-0.19.tar.gz#md5=af5cc956b2673b33a25c3e57299bae7b</action>
         <action type="make_directory">$INSTALL_DIR/lib/python</action>
-        <action type="template_command">
+        <action type="shell_command">
           export PYTHONPATH=$PYTHONPATH:$INSTALL_DIR/lib/python &amp;&amp;
           python setup.py install --install-lib $INSTALL_DIR/lib/python
         </action>

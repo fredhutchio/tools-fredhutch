@@ -31,7 +31,7 @@
           </repository>
         </action>
         <action type="make_directory">$INSTALL_DIR/lib/python</action>
-        <action type="template_command">
+        <action type="shell_command">
           export PYTHONPATH=$PYTHONPATH:$INSTALL_DIR/lib/python &amp;&amp;
           python setup.py install --install-lib $INSTALL_DIR/lib/python
         </action>

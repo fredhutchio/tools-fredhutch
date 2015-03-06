@@ -54,7 +54,7 @@
           help="FASTA file of reference sequences; Must be in alignment with query sequences, and sequence names should correspond to cluster names if using a cluster map.
           If not using a cluster map, ensure a sequence named 'all' is included in the alignment.
           Clusters for which no reference sequence is specified will be compared to a computed consensus sequence."/>
-        <param name="cluster_map" type="data" format="csv" label="Sequence-to-cluster map"
+        <param name="cluster_map" type="data" format="csv" label="Sequence-to-cluster map" optional="true"
           help="CSV file mapping sequences to clusters. Any sequences not mapped to a cluster will be implicitly put in an 'all' cluster."/>
       </when>
       <when value="automatic">
@@ -82,6 +82,9 @@ SIG_LEVEL="${sig_level}"
 REFERENCE="-c $reference_source.ref_file"
 #else if $reference_source.reference_source_selector == "manual"
 REFERENCE="-r $reference_source.ref_file"
+  #if $reference_source.cluster_map
+REFERENCE="\$REFERENCE -c $reference_source.cluster_map"
+  #end if
 #else
 REFERENCE=""
 #end if

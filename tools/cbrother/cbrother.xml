@@ -1,0 +1,51 @@
+<tool id="CFAR_cbrother" name="Analyze sequences for recombination" version="1.0.0">
+  <description>using Bayesian analysis with cbrother</description>
+  <macros>
+    <import>macros.xml</import>
+  </macros>
+  <version_command>echo "cbrother v?"</version_command>
+  <command interpreter="bash">
+    cbrother-wrapper.sh ${config}
+  </command>
+  <stdio>
+    <expand macro="basic_errors"/>
+  </stdio>
+  <inputs>
+    <param name="alignment" type="data" format="fasta" label="Alignment"/>
+    <param name="genotype_map" type="data" format="csv" label="Genotype map"/>
+    <param name="length" type="integer" value="1100000" min="110000" max="55000000" label="MCMC length" help="If the analysis results indicate poor convergence, try increasing this value."/>
+    <param name="allow_ancient" type="boolean" truevalue="TRUE" falsevalue="FALSE" label="Allow ancient ancestry" help="If this option is enabled, ancestral nodes will be considered as additional genotypes. See &lt;a href=&quot;http://thirteen-01.stat.iastate.edu/wiki/CBrotherAllowAncientAncestry&quot;&gt;this page&lt;/a&gt; for more information."/>
+    <param name="consensus" type="boolean" truevalue="TRUE" falsevalue="FALSE" checked="true" label="Use consensus sequences" help="If this option is enabled, consensus sequences for each genotype will be used instead of individual representative sequences. This option is recommended. See &lt;a href=&quot;http://thirteen-01.stat.iastate.edu/wiki/CBrotherRepresentativeData&quot;&gt;this page&lt;/a&gt; for more information."/>
+    <param name="parent_tree" type="data" format="nhx" optional="true" label="Parent tree" help="If the topology is known, you can constrain the search by providing a fixed parent tree."/>
+
+  </inputs>
+  <outputs>
+    <data name="report" format="pdf" label="Recombination report"/>
+    <data name="genotype_profile" format="csv" label="Combined genotype profile"/>
+  </outputs>
+  <configfiles>
+    <configfile name="config">
+ALIGNMENT="${alignment}"
+GENOTYPE_MAP="${genotype_map}"
+LENGTH="${length}"
+ALLOW_ANCIENT="${allow_ancient}"
+CONSENSUS="${consensus}"
+PARENT_TREE="${parent_tree}"
+
+REPORT="${report}"
+GENOTYPE_PROFILE="${genotype_profile}"
+    </configfile>
+  </configfiles>
+  <!-- The contents of the help tag is parsed as reStructuredText. Please see
+       help-template.rst for examples of commonly-used sections in other Galaxy
+       tools. -->
+  <help>
+
+.. class:: infomark
+
+**What it does**
+
+cBrother is software for inferring recombination when recombination is rare.
+
+  </help>
+</tool>

@@ -1,0 +1,31 @@
+<tool_dependency>
+  <package name="gsl" version="1.16">
+    <repository name="package_gsl_1_16" owner="iuc" prior_installation_required="True"/>
+  </package>
+  <package name="cbrother" version="2.0">
+    <install version="1.0">
+      <actions>
+        <action type="download_by_url">http://thirteen-01.stat.iastate.edu/software/cbrother2.0.tar.gz</action>
+        <action type="set_environment_for_install">
+          <repository name="package_gsl_1_16" owner="iuc">
+            <package name="gsl" version="1.16"/>
+          </repository>
+        </action>
+        <action type="make_directory">$INSTALL_DIR/bin</action>
+        <action type="shell_command">
+          sed -i 's/-march=i486/-march=native/' Makefile &amp;&amp;
+          LIBRARY_PATH=$GSL_ROOT_PATH/lib:$LIBRARY_PATH INSTALL_DIR=$INSTALL_DIR/bin make -e install
+        </action>
+        <action type="set_environment">
+          <environment_variable action="prepend_to" name="PATH">$INSTALL_DIR/bin</environment_variable>
+          <environment_variable action="set_to" name="PATH_CBROTHER">$INSTALL_DIR/bin</environment_variable>
+        </action>
+      </actions>
+    </install>
+    <readme>
+      cBrother is software for inferring recombination when recombination is rare.
+      The PATH for cBrother can be accessed through PATH_CBROTHER.
+      http://thirteen-01.stat.iastate.edu/wiki/cBrother
+    </readme>
+  </package>
+</tool_dependency>

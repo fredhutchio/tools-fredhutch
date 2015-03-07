@@ -1,0 +1,3 @@
+[submodule "tools/cbrother/cbrother_pipeline"]
+	path = tools/cbrother/cbrother_pipeline
+	url = stoat:/shared/silo_researcher/Matsen_F/MatsenGrp/git_remotes/cbrother_pipeline.git/

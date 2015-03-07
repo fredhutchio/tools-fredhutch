@@ -1,0 +1,27 @@
+<tool_dependency>
+  <package name="colt" version="1.0.3">
+    <repository name="package_colt_1_0_3" owner="bcclaywell" previous_install_required="False"/>
+  </package>
+  <package name="dualbrothers" version="1.1">
+    <install version="1.0">
+      <actions>
+        <action type="download_by_url">http://faculty.biomath.ucla.edu/msuchard/htdocs/DualBrothers/DualBrothers-1.1.tar.gz</action>
+        <action type="move_file">
+          <source>DualBrothers-1.1.jar</source>
+          <destination>$INSTALL_DIR/lib</destination>
+        </action>
+        <action type="set_environment">
+          <environment_variable action="prepend_to" name="CLASSPATH">$INSTALL_DIR/lib/DualBrothers-1.1.jar</environment_variable>
+          <environment_variable action="set_to" name="CLASSPATH_DUALBROTHERS">$INSTALL_DIR/lib/DualBrothers-1.1.jar</environment_variable>
+        </action>
+      </actions>
+    </install>
+    <readme>
+      DualBrothers is a recombination detection software based on the dual Multiple Change-Point (MCP) model.
+      This model allows for changes in topology and evolutionary rates across sites in a multiple sequence alignment.
+      We use Bayesian approach together with an MCMC sampling to simulate from the posterior distribution of the dual MCP model parameters.
+      The CLASSPATH for DualBrothers can be accessed through CLASSPATH_DUALBROTHERS.
+      http://faculty.biomath.ucla.edu/msuchard/htdocs/DualBrothers/
+    </readme>
+  </package>
+</tool_dependency>

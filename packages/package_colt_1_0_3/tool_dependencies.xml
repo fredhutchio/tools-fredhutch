@@ -1,0 +1,22 @@
+<tool_dependency>
+  <package name="colt" version="1.0.3">
+    <install version="1.0">
+      <actions>
+        <action type="download_by_url">http://dst.lbl.gov/ACSSoftware/colt/colt-download/releases/colt-1.0.3.zip</action>
+        <action type="move_file">
+          <source>colt.jar</source>
+          <destination>$INSTALL_DIR/lib</destination>
+        </action>
+        <action type="set_environment">
+          <environment_variable action="prepend_to" name="CLASSPATH">$INSTALL_DIR/lib/colt.jar</environment_variable>
+          <environment_variable action="set_to" name="CLASSPATH_COLT">$INSTALL_DIR/lib/colt.jar</environment_variable>
+        </action>
+      </actions>
+    </install>
+    <readme>
+      Colt provides a set of Open Source Libraries for High Performance Scientific and Technical Computing in Java.
+      The CLASSPATH for Colt can be accessed through CLASSPATH_COLT.
+      http://dst.lbl.gov/ACSSoftware/colt/
+    </readme>
+  </package>
+</tool_dependency>

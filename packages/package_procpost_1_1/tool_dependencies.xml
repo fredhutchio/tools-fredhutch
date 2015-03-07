@@ -1,0 +1,45 @@
+<tool_dependency>
+  <package name="perl" version="5.18.1">
+    <repository name="package_perl_5_18" owner="iuc" prior_installation_required="False"/>
+  </package>
+  <package name="R" version="3.1.2">
+    <repository name="package_r_3_1_2" owner="iuc" prior_installation_required="False"/>
+  </package>
+  <package name="procpost" version="1.1">
+    <install version="1.0">
+      <actions>
+        <action type="download_by_url">http://thirteen-01.stat.iastate.edu/software/procpost1.1.tar.gz</action>
+        <action type="make_directory">$INSTALL_DIR/lib</action>
+        <action type="make_directory">$INSTALL_DIR/bin</action>
+        <action type="move_file">
+          <source>procpost</source>
+          <destination>$INSTALL_DIR/bin</destination>
+        </action>
+        <action type="move_file">
+          <source>ptop</source>
+          <destination>$INSTALL_DIR/bin</destination>
+        </action>
+        <action type="move_file">
+          <source>plot.recomb.R</source>
+          <destination>$INSTALL_DIR/bin</destination>
+        </action>
+        <action type="move_directory_files">
+          <source_directory>lib</source_directory>
+          <destination_directory>$INSTALL_DIR/lib</destination_directory>
+        </action>
+        <action type="set_environment">
+          <environment_variable action="prepend_to" name="PATH">$INSTALL_DIR/bin</environment_variable>
+          <environment_variable action="prepend_to" name="PERL5LIB">$INSTALL_DIR/lib</environment_variable>
+          <environment_variable action="set_to" name="PATH_PROCPOST">$INSTALL_DIR/bin</environment_variable>
+          <environment_variable action="set_to" name="PERL5LIB_PROCPOST">$INSTALL_DIR/lib</environment_variable>
+        </action>
+      </actions>
+    </install>
+    <readme>
+      A collection of perl scripts/modules to analyze the posterior files produced by cBrother.
+      The PATH for procpost can be accessed through PATH_PROCPOST.
+      The PERL5LIB for procpost can be accessed through PERL5LIB_PROCPOST.
+      http://thirteen-01.stat.iastate.edu/wiki/cBrother
+    </readme>
+  </package>
+</tool_dependency>

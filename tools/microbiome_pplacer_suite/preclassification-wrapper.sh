@@ -25,6 +25,6 @@ guppy classify \
     --sqlite ${CLASS_DB} \
     --classifier hybrid2 \
     --nbc-sequences ${NBC_SEQS} \
-    ${REDUPED_SEQS}
+    ${PLACED_SEQS}
 
 multiclass_concat.py --dedup-info ${DEDUP_INFO} ${CLASS_DB}

@@ -1,5 +1,5 @@
-<tool id="PHYLO_preprocessing" name="Deduplicate sequences" version="3.0.0">
-  <description>in preparation for alignment and placement</description>
+<tool id="PHYLO_alignment" name="Align query sequences" version="1.0.0">
+  <description>with sequences in a reference package</description>
   <requirements>
     <requirement type="package">yapp_env</requirement>
   </requirements>
@@ -8,26 +8,26 @@
   </macros>
   <version_command>echo "guppy $(guppy --version)"</version_command>
   <command interpreter="bash">
-    preprocessing-wrapper.sh ${config}
+    alignment-wrapper.sh ${config}
   </command>
   <stdio>
     <expand macro="basic_errors"/>
   </stdio>
   <inputs>
+    <param name="refpkg" type="data" format="refpkg" label="Reference package"/>
     <param name="input_seqs" type="data" format="fasta" label="Input sequences"/>
-    <param name="split_map" type="data" format="csv" label="Read-to-specimen map"/>
   </inputs>
   <outputs>
-    <data name="dedup_seqs" format="fasta" label="Deduplicated sequences"/>
-    <data name="dedup_info" format="csv" label="Deduplication info"/>
+    <data name="aligned_seqs" format="fasta" label="Aligned sequences"/>
+    <data name="aligned_scores" format="txt" label="Alignment scores"/>
   </outputs>
   <configfiles>
     <configfile name="config">
+REFPKG="${refpkg.extra_files_path}"
 INPUT_SEQS="${input_seqs}"
-SPLIT_MAP="${split_map}"
 
-DEDUP_SEQS="${dedup_seqs}"
-DEDUP_INFO="${dedup_info}"
+ALIGNED_SEQS="${aligned_seqs}"
+ALIGNED_SCORES="${aligned_scores}"
     </configfile>
   </configfiles>
   <!-- The contents of the help tag is parsed as reStructuredText. Please see
@@ -39,7 +39,9 @@ DEDUP_INFO="${dedup_info}"
 
 **What it does**
 
-This tool deduplicates input sequences in preparation for alignment and placement.
+This tool aligns query sequences with the reference sequences used to make the
+reference tree contained in the reference package and then merges the query and
+reference sequences.
 
   </help>
 </tool>

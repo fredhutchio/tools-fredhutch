@@ -1,4 +1,4 @@
-<tool id="PHYLO_filter" name="Filter and trim" version="1.3.0">
+<tool id="PHYLO_filter" name="Filter and trim" version="1.2.0">
   <description>sequences</description>
   <requirements>
     <requirement type="package">yapp_env</requirement>
@@ -31,8 +31,21 @@
     <data name="filter_report" format="tabular" label="Filtering report"/>
     <data name="filter_details" format="data" label="Filtering details"/>
     <data name="split_map" format="csv" label="Read-to-specimen map"/>
+    <data name="seq_qual_report" format="html" label="Sequence quality report"/>
   </outputs>
   <configfiles>
+    <configfile name="plate_json">
+{
+  "plate": ${plate_id},
+  "name": "Plate ${plate_id}",
+  "zones": [
+    {
+      "zone": ${zone_id},
+      "cleaning_stats": "${filter_details}"
+    }
+  ]
+}
+    </configfile>
     <configfile name="config">
 RAW_SEQS="${raw_seqs}"
 INPUT_QUAL="${input_qual}"
@@ -41,11 +54,14 @@ PRIMER="${primer}"
 MIN_LENGTH="${min_length}"
 MIN_QUALITY="${min_quality}"
 REVERSE_COMPLEMENT="${reverse_complement}"
+PLATE_JSON="${plate_json}"
 
 FILTERED_SEQS="${filtered_seqs}"
 FILTER_REPORT="${filter_report}"
 FILTER_DETAILS="${filter_details}"
 SPLIT_MAP="${split_map}"
+SQR="${seq_qual_report}"
+SQR_DIR="${seq_qual_report.files_path}"
     </configfile>
   </configfiles>
   <!-- The contents of the help tag is parsed as reStructuredText. Please see
@@ -60,7 +76,7 @@ SPLIT_MAP="${split_map}"
 This tool truncates and removes sequences that don’t match a set of quality
 criteria, as well as mapping sequence barcodes to specimens. It takes input
 sequences in FASTA format and a quality file, and outputs the filtered
-sequences as well as a filtering summary.
+sequences as well as a filtering summary and a sequence quality report.
 
 The default quality filter settings are:
 

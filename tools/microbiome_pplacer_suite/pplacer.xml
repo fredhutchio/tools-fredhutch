@@ -41,13 +41,8 @@ This tool places query sequences on a fixed reference phylogenetic tree
 according to a reference alignment, producing taxonomic annotations which can
 be used for classification and visualization.
 
------
-
-**Citation**
-
-Matsen F, Kodner R, Armbrust E V: **pplacer: linear time maximum-likelihood and
-Bayesian phylogenetic placement of sequences onto a fixed reference tree**. BMC
-Bioinformatics 2010, **11**:1.
-
   </help>
+  <citations>
+    <expand macro="cite_pplacer"/>
+  </citations>
 </tool>

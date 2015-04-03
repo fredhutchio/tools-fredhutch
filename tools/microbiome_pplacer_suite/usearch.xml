@@ -39,12 +39,8 @@ USEARCH_GROUPS="${usearch_groups}"
 This tool queries large sequence databases for target sequences and assigns
 those sequences to clusters.
 
------
-
-**Citation**
-
-Edgar, R C: **Search and clustering orders of magnitude faster than
-BLAST**. Bioinformatics 2010, **26**:19.
-
   </help>
+  <citations>
+    <expand macro="cite_usearch"/>
+  </citations>
 </tool>

@@ -100,4 +100,8 @@ parameters.
 .. _quality filter documentation: http://fhcrc.github.io/seqmagick/quality_filter.html
 
   </help>
+  <citations>
+    <expand macro="cite_seqmagick"/>
+    <expand macro="cite_biopython"/>
+  </citations>
 </tool>

@@ -6,7 +6,7 @@
   <macros>
     <import>macros.xml</import>
   </macros>
-  <version_command>echo "guppy $(guppy --version)"</version_command>
+  <version_command>echo "pplacer $(pplacer --version)"</version_command>
   <command interpreter="bash">
     preprocessing-wrapper.sh ${config}
   </command>
@@ -42,4 +42,7 @@ DEDUP_INFO="${dedup_info}"
 This tool deduplicates input sequences in preparation for alignment and placement.
 
   </help>
+  <citations>
+    <expand macro="cite_pplacer"/>
+  </citations>
 </tool>

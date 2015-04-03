@@ -6,7 +6,7 @@
   <macros>
     <import>macros.xml</import>
   </macros>
-  <version_command>echo "guppy $(guppy --version)"</version_command>
+  <version_command>echo "$(taxit -V); $(cmalign -h | grep INFERNAL); $(esl-alimerge -h | grep Easel)"</version_command>
   <command interpreter="bash">
     alignment-wrapper.sh ${config}
   </command>
@@ -44,4 +44,8 @@ reference tree contained in the reference package and then merges the query and
 reference sequences.
 
   </help>
+  <citations>
+    <expand macro="cite_taxtastic"/>
+    <expand macro="cite_infernal"/>
+  </citations>
 </tool>

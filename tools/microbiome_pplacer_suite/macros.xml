@@ -5,4 +5,39 @@
     <regex match="traceback" level="fatal"/>
     <regex match="warning" level="warning"/>
   </macro>
+  <macro name="cite_seqmagick">
+    <citation type="bibtex">@MISC{fhcrc_seqmagick,
+  title       = {seqmagick: An imagemagick-like frontend to Biopython SeqIO},
+  publisher   = {GitHub},
+  url         = "http://github.com/fhcrc/seqmagick",
+  note        = "version 0.5.0"
+}
+    </citation>
+  </macro>
+  <!-- Biopython 1.63 -->
+  <macro name="cite_biopython">
+    <citation type="doi">10.1093/bioinformatics/btp163</citation>
+  </macro>
+  <macro name="cite_taxtastic">
+    <citation type="bibtex">@MISC{fhcrc_taxtastic,
+  title       = {taxtastic: Create and maintain phylogenetic "reference packages" of biological sequences},
+  publisher   = {GitHub},
+  url         = "http://github.com/fhcrc/taxtastic",
+  note        = "version 0.5.2"
+}
+    </citation>
+  </macro>
+  <!-- INFERNAL 1.1 -->
+  <macro name="cite_infernal">
+    <citation type="doi">10.1093/bioinformatics/btt509</citation>
+  </macro>
+  <!-- pplacer 1.1alpha
+       (the citation is for pplacer 1.0) -->
+  <macro name="cite_pplacer">
+    <citation type="doi">10.1186/1471-2105-11-538</citation>
+  </macro>
+  <!-- USEARCH 6 -->
+  <macro name="cite_usearch">
+    <citation type="doi">10.1093/bioinformatics/btq461</citation>
+  </macro>
 </macros>

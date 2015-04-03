@@ -6,7 +6,7 @@
   <macros>
     <import>macros.xml</import>
   </macros>
-  <version_command>echo "guppy $(guppy --version)"</version_command>
+  <version_command>echo "pplacer $(pplacer --version)"</version_command>
   <command interpreter="bash">
     classification-wrapper.sh ${config}
   </command>
@@ -101,4 +101,7 @@ below species, but only one classification at the genus level::
     GLKT0ZE01CQ2BU             below_species       species  341694   0.073214
 
   </help>
+  <citations>
+    <expand macro="cite_pplacer"/>
+  </citations>
 </tool>

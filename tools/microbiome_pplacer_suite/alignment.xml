@@ -1,18 +1,18 @@
 <tool id="PHYLO_alignment" name="Align query sequences" version="1.0.0">
   <description>with sequences in a reference package</description>
-  <requirements>
-    <requirement type="package">yapp_env</requirement>
-  </requirements>
   <macros>
     <import>macros.xml</import>
   </macros>
+  <requirements>
+    <requirement type="package">yapp_env</requirement>
+  </requirements>
+  <stdio>
+    <expand macro="basic_errors"/>
+  </stdio>
   <version_command>echo "$(taxit -V); $(cmalign -h | grep INFERNAL); $(esl-alimerge -h | grep Easel)"</version_command>
   <command interpreter="bash">
     alignment-wrapper.sh ${config}
   </command>
-  <stdio>
-    <expand macro="basic_errors"/>
-  </stdio>
   <inputs>
     <param name="refpkg" type="data" format="refpkg" label="Reference package"/>
     <param name="input_seqs" type="data" format="fasta" label="Input sequences"/>

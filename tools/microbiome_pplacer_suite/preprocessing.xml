@@ -1,18 +1,18 @@
 <tool id="PHYLO_preprocessing" name="Deduplicate sequences" version="3.0.0">
   <description>in preparation for alignment and placement</description>
-  <requirements>
-    <requirement type="package">yapp_env</requirement>
-  </requirements>
   <macros>
     <import>macros.xml</import>
   </macros>
+  <requirements>
+    <requirement type="package">yapp_env</requirement>
+  </requirements>
+  <stdio>
+    <expand macro="basic_errors"/>
+  </stdio>
   <version_command>echo "pplacer $(pplacer --version)"</version_command>
   <command interpreter="bash">
     preprocessing-wrapper.sh ${config}
   </command>
-  <stdio>
-    <expand macro="basic_errors"/>
-  </stdio>
   <inputs>
     <param name="input_seqs" type="data" format="fasta" label="Input sequences"/>
     <param name="split_map" type="data" format="csv" label="Read-to-specimen map"/>

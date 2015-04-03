@@ -1,18 +1,18 @@
 <tool id="PHYLO_classification" name="Output classifications" version="2.1.0">
   <description>in tabular format</description>
-  <requirements>
-    <requirement type="package">yapp_env</requirement>
-  </requirements>
   <macros>
     <import>macros.xml</import>
   </macros>
+  <requirements>
+    <requirement type="package">yapp_env</requirement>
+  </requirements>
+  <stdio>
+    <expand macro="basic_errors"/>
+  </stdio>
   <version_command>echo "pplacer $(pplacer --version)"</version_command>
   <command interpreter="bash">
     classification-wrapper.sh ${config}
   </command>
-  <stdio>
-    <expand macro="basic_errors"/>
-  </stdio>
   <inputs>
     <param name="split_map" type="data" format="csv" label="Read-to-specimen map"/>
     <param name="label_map" type="data" format="csv" label="Specimen-to-label map"/>

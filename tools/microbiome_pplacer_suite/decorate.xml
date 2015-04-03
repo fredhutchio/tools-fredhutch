@@ -1,18 +1,18 @@
 <tool id="PHYLO_decorate" name="Decorate" version="1.0.0">
   <description>classification results with sample metadata</description>
-  <requirements>
-    <requirement type="package">yapp_env</requirement>
-  </requirements>
   <macros>
     <import>macros.xml</import>
   </macros>
+  <requirements>
+    <requirement type="package">yapp_env</requirement>
+  </requirements>
+  <stdio>
+    <expand macro="basic_errors"/>
+  </stdio>
   <version_command>echo "decorate script 1.0.0"</version_command>
   <command interpreter="bash">
     decorate-wrapper.sh ${config}
   </command>
-  <stdio>
-    <expand macro="basic_errors"/>
-  </stdio>
   <inputs>
     <param name="group_by_specimen" type="data" format="csv" label="Grouped-by-specimen classification"/>
     <param name="metadata" type="data" format="csv" label="Sample metadata"/>

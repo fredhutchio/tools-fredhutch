@@ -3,12 +3,12 @@
   <macros>
     <import>macros.xml</import>
   </macros>
-  <command interpreter="bash">
-    render_datatable-wrapper.sh $config
-  </command>
   <stdio>
     <expand macro="basic_errors"/>
   </stdio>
+  <command interpreter="bash">
+    render_datatable-wrapper.sh $config
+  </command>
   <inputs>
     <param name="input" type="data" format="csv" label="CSV file"/>
   </inputs>

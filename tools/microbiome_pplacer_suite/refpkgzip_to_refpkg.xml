@@ -7,5 +7,12 @@
     <data name="output" format="refpkg"/>
   </outputs>
   <help>
+
+.. class:: infomark
+
+**What it does**
+
+This tool unpacks a reference package from a ZIP file.
+
   </help>
 </tool>

@@ -8,6 +8,7 @@
   <macro name="cite_seqmagick">
     <citation type="bibtex">@MISC{fhcrc_seqmagick,
   title       = {seqmagick: An imagemagick-like frontend to Biopython SeqIO},
+  author      = {McCoy, C. O. and Hodges, B. and Rosenthal, C. and Gallagher, A. and Matsen, IV, F. A.},
   publisher   = {GitHub},
   url         = "http://github.com/fhcrc/seqmagick",
   note        = "version 0.5.0"
@@ -21,6 +22,7 @@
   <macro name="cite_taxtastic">
     <citation type="bibtex">@MISC{fhcrc_taxtastic,
   title       = {taxtastic: Create and maintain phylogenetic "reference packages" of biological sequences},
+  author      = {McCoy, C. O. and Hoffman, N. G. and Gallagher, A. and Hodges, B. and Ross, F. and Matsen, IV, F. A.},
   publisher   = {GitHub},
   url         = "http://github.com/fhcrc/taxtastic",
   note        = "version 0.5.2"
@@ -35,6 +37,14 @@
        (the citation is for pplacer 1.0) -->
   <macro name="cite_pplacer">
     <citation type="doi">10.1186/1471-2105-11-538</citation>
+    <citation type="bibtex">@MISC{fhcrc_pplacer,
+  title       = {pplacer: Phylogenetic placement and downstream analysis},
+  author      = {Gallagher, A. and McCoy, C. O. and Claywell, B. C. and Small, C. T. and Hodges, B. and Hoffman, N. G. and Matsen, IV, F. A.},
+  publisher   = {GitHub},
+  url         = "http://github.com/matsen/pplacer",
+  note        = "version v1.1.alpha16-1-gf748c91"
+}
+    </citation>
   </macro>
   <!-- USEARCH 6 -->
   <macro name="cite_usearch">

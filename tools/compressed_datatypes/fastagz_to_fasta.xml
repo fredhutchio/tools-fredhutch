@@ -1,0 +1,12 @@
+<tool id="CONVERTER_fastagz_to_fasta_0" name="Convert fasta.gz to fasta" version="1.0.0">
+    <!--  <description>__NOT_USED_CURRENTLY_FOR_CONVERTERS__</description> -->
+    <command>gunzip -c $input &gt; $output</command>
+    <inputs>
+        <param name="input" type="data" format="fasta.gz" label="fasta.gz file"/>
+    </inputs>
+    <outputs>
+        <data name="output" format="fasta"/>
+    </outputs>
+    <help>
+    </help>
+</tool>

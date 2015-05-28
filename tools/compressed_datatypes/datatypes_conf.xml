@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<datatypes>
+    <registration>
+        <datatype extension="fasta.gz" type="galaxy.datatypes.binary:CompressedArchive" subclass="True" mimetype="application/gzip" display_in_upload="True">
+            <converter file="fastagz_to_fasta.xml" target_datatype="fasta"/>
+        </datatype>
+        <datatype extension="fastq.gz" type="galaxy.datatypes.binary:CompressedArchive" subclass="True" mimetype="application/gzip" display_in_upload="True">
+            <converter file="fastqgz_to_fastq.xml" target_datatype="fastq"/>
+        </datatype>
+    </registration>
+</datatypes>

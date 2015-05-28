@@ -1,0 +1,12 @@
+<tool id="CONVERTER_fastqgz_to_fastq_0" name="Convert fastq.gz to fastq" version="1.0.0">
+    <!--  <description>__NOT_USED_CURRENTLY_FOR_CONVERTERS__</description> -->
+    <command>gunzip -c $input &gt; $output</command>
+    <inputs>
+        <param name="input" type="data" format="fastq.gz" label="fastq.gz file"/>
+    </inputs>
+    <outputs>
+        <data name="output" format="fastq"/>
+    </outputs>
+    <help>
+    </help>
+</tool>

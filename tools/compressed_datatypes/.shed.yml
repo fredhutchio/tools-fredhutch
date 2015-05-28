@@ -1,0 +1,4 @@
+categories: !!python/tuple [Convert Formats]
+description: !!python/unicode 'Datatypes and converters for compressed data'
+name: compressed_datatypes
+owner: !!python/unicode 'bcclaywell'

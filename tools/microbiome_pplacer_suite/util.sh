@@ -46,7 +46,7 @@ on_exit() {
 
 set -eux
 
-xargs -n 1 -0 < /proc/self/environ > env.log
+env > env.log
 
 START_TIME=$(timer)
 trap on_exit EXIT
